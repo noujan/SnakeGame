@@ -1,2 +1,2 @@
 # SnakeGame
-I want to build a ligit Snake Game with multiplayer option so I can play with my friends!
+I want to build a legit Snake Game with multiplayer option so I can play it with my friends!
