@@ -17,7 +17,7 @@ struct SnakeGameView: View {
     @State var isStarted = true // did the user started the swipe?
     @State var gameOver = false // for ending the game when the snake hits the screen borders
     @State var dir = direction.down // the direction the snake is going to take
-    @State var posArray = [CGPoint(x: 0, y: 0)] // array of the snake's body positions
+    @State var posArray = [CGPoint(x: 20, y: 100)] // array of the snake's body positions
     @State var foodPos = CGPoint(x: 0, y: 0) // the position of the food
     @State var snakeSize : CGFloat = 10 // width and height of the snake
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
@@ -25,27 +25,35 @@ struct SnakeGameView: View {
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     
-    let minX = UIScreen.main.bounds.minX
-    let maxX = UIScreen.main.bounds.maxX
-    let minY = UIScreen.main.bounds.minY
-    let maxY = UIScreen.main.bounds.maxY
+//    let minX = UIScreen.main.bounds.minX
+    let minX = CGFloat(20)
+    let maxX = UIScreen.main.bounds.maxX - 60
+//    let minY = UIScreen.main.bounds.minY
+    let minY = CGFloat(20)
+    let maxY = UIScreen.main.bounds.maxY - 220
 
     func changeRectPos() -> CGPoint {
-            let rows = Int(maxX/snakeSize)
-            let cols = Int(maxY/snakeSize)
-            
-            let randomX = Int.random(in: 1..<rows) * Int(snakeSize)
-            let randomY = Int.random(in: 1..<cols) * Int(snakeSize)
-            
-            return CGPoint(x: randomX, y: randomY)
-        }
+        let rows = Int(maxX/snakeSize)
+        let cols = Int(maxY/snakeSize)
+        
+        let randomX = Int.random(in: 1..<rows) * Int(snakeSize)
+        let randomY = Int.random(in: 1..<cols) * Int(snakeSize)
+        
+        return CGPoint(x: randomX, y: randomY)
+    }
 
     func changeDirection () {
-        if self.posArray[0].x < minX || self.posArray[0].x > maxX && !gameOver{
-            gameOver.toggle()
-        }
-        else if self.posArray[0].y < minY || self.posArray[0].y > maxY  && !gameOver {
-            gameOver.toggle()
+
+        let posX = posArray[0].x
+        let posY = posArray[0].y
+        if posX < minX - snakeSize {
+            posArray[0] = CGPoint(x: maxX + 2*snakeSize, y: posY)
+        } else if posX > maxX + snakeSize {
+            posArray[0] = CGPoint(x: minX - 2*snakeSize, y: posY)
+        } else if posY < minY - snakeSize {
+            posArray[0] = CGPoint(x: posX, y: maxY + 2*snakeSize)
+        } else if posY > maxY + snakeSize {
+            posArray[0] = CGPoint(x: posX, y: minY - 2*snakeSize)
         }
 
         var prev = posArray[0]
@@ -68,6 +76,7 @@ struct SnakeGameView: View {
 
     
     var body: some View {
+        
         ZStack {
             Color.pink.opacity(0.3)
             ZStack {
@@ -86,7 +95,7 @@ struct SnakeGameView: View {
                 VStack{
                     Text("Game Over")
                     Button(action: {
-                        posArray = [CGPoint(x: 0, y: 0)]
+                        posArray = [CGPoint(x: 20, y: 100)]
                         self.gameOver = false
                         startPos = .zero
                         snakeSize = 10
@@ -149,7 +158,7 @@ struct SnakeGameView: View {
                 
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .padding(EdgeInsets(top: 100, leading: 20, bottom: 20, trailing: 20))
     }
     
     
