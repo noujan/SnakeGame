@@ -12,14 +12,14 @@ target 'SnakeG' do
   pod 'Firebase/Database'
   
   # Only pull in Auth features
-  pod 'FirebaseUI/Auth', '~> 8.0'
+  pod 'FirebaseUI/Auth'
 
   # Only pull in Facebook login features
-  pod 'FirebaseUI/Facebook', '~> 8.0'
+  pod 'FirebaseUI/Facebook'
 
   # Only pull in Google login features
-  pod 'FirebaseUI/Google', '~> 8.0'
+  pod 'FirebaseUI/Google'
 
   # Only pull in Phone Auth login features
-  pod 'FirebaseUI/Phone', '~> 8.0'
+  pod 'FirebaseUI/Phone'
 end

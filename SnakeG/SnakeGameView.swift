@@ -205,6 +205,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             SnakeGameView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
         }
         
     }
