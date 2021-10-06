@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct SnakeGameView: View {
     
@@ -21,6 +22,10 @@ struct SnakeGameView: View {
     @State var foodPos = CGPoint(x: 0, y: 0) // the position of the food
     @State var snakeSize : CGFloat = 10 // width and height of the snake
     @State var scoreLabel = "score: 0"
+    
+    @State var timerOneSec = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    @State var timePassed = 0
+    
     @State var score : Int = 0 {
         didSet{
             scoreLabel = "score: \(score)"
@@ -34,9 +39,11 @@ struct SnakeGameView: View {
     
 //    let minX = UIScreen.main.bounds.minX
     let minX = CGFloat(20)
+    // maxX in iPhone 12 pro is: 330.0
     let maxX = UIScreen.main.bounds.maxX - 60
 //    let minY = UIScreen.main.bounds.minY
     let minY = CGFloat(20)
+    // maxY in iPhone 12 pro is: 624.0
     let maxY = UIScreen.main.bounds.maxY - 220
 
     func changeRectPos() -> CGPoint {
@@ -49,18 +56,24 @@ struct SnakeGameView: View {
         return CGPoint(x: randomX, y: randomY)
     }
 
+
+    
     func changeDirection () {
 
         let posX = posArray[0].x
         let posY = posArray[0].y
         if posX < minX - snakeSize {
-            posArray[0] = CGPoint(x: maxX + 2*snakeSize, y: posY)
+//            print("posX: \(posX), minX: \(minX)")
+            posArray[0] = CGPoint(x: (maxX/10).rounded()*10 + snakeSize, y: posY)
         } else if posX > maxX + snakeSize {
-            posArray[0] = CGPoint(x: minX - 2*snakeSize, y: posY)
+//            print("posX: \(posX), minX: \(maxX)")
+            posArray[0] = CGPoint(x: minX - snakeSize, y: posY)
         } else if posY < minY - snakeSize {
-            posArray[0] = CGPoint(x: posX, y: maxY + 2*snakeSize)
-        } else if posY > maxY + snakeSize {
-            posArray[0] = CGPoint(x: posX, y: minY - 2*snakeSize)
+            print("posY up: \(posY), minY: \(minY)")
+            posArray[0] = CGPoint(x: posX, y: (maxY/10).rounded()*10 + 5 * snakeSize)
+        } else if posY > maxY + 4 * snakeSize {
+            print("posY down: \(posY), maxY: \((maxY/10).rounded()*10)")
+            posArray[0] = CGPoint(x: posX, y: minY - 2 * snakeSize)
         }
 
         var prev = posArray[0]
@@ -102,6 +115,10 @@ struct SnakeGameView: View {
                 if self.gameOver {
                     VStack{
                         Text("Game Over")
+                            .onReceive(timerOneSec) { _ in
+                                self.timerOneSec.upstream.connect().cancel()
+                                timePassed = 0
+                            }
                         Button(action: {
                             posArray = [CGPoint(x: 20, y: 100)]
                             self.gameOver = false
@@ -112,6 +129,8 @@ struct SnakeGameView: View {
                             foodPos = CGPoint(x: 0, y: 0)
                             self.foodPos = self.changeRectPos()
                             
+                            
+                            timerOneSec = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
                         }, label: {
                             Text("Restart")
                         })
@@ -129,6 +148,7 @@ struct SnakeGameView: View {
                                 self.startPos = gesture.location
                                 self.isStarted.toggle()
                             }
+                            
                         }
                         .onEnded {  gesture in
                             let xDist =  abs(gesture.location.x - self.startPos.x)
@@ -147,17 +167,22 @@ struct SnakeGameView: View {
                             }
                             self.isStarted.toggle()
                         }
+                        
             )
             .onReceive(timer) { (_) in
+//                print("posArr -> \(posArray)")
+//                print("maxX is -> \(maxX)")
+//                print("maxY is -> \(maxY)")
                 if !self.gameOver {
                     self.changeDirection()
                     if self.posArray[0] == self.foodPos {
                         self.posArray.append(self.posArray[0])
                         self.foodPos = self.changeRectPos()
+                        timePassed = timePassed / 2
                     } else {
                         let tempArr = posArray.dropFirst()
-                        print("temp--> \(tempArr)")
-                        print("pos--> \(posArray)")
+//                        print("temp--> \(tempArr)")
+//                        print("pos--> \(posArray)")
                         if tempArr.contains(posArray[0]) {
                             print("No no - You are done! game over!")
                             gameOver.toggle()
@@ -167,9 +192,12 @@ struct SnakeGameView: View {
                 }
             }
             .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+            .onReceive(timerOneSec) { (_) in
+                timePassed += 1
+                score = timePassed
+            }
         }
-        }
-    
+    }
     
 }
 
@@ -178,5 +206,6 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             SnakeGameView()
         }
+        
     }
 }
