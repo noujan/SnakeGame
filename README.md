@@ -10,3 +10,7 @@ ToDo:
 - [ ] Change and improve score system
 
 Soon I will add screenshots to this project.
+
+![Simulator Screen Shot - iPhone 12 Pro - 2021-10-06 at 00 49 11](https://user-images.githubusercontent.com/7261365/136142894-5ffd0b99-548d-4f32-b7e2-0524e58ac937.png)
+
+![Simulator Screen Shot - iPhone 12 Pro - 2021-10-06 at 00 48 23](https://user-images.githubusercontent.com/7261365/136142896-0408bdf4-79e5-43e5-8dfd-45d1f17c5578.png)
