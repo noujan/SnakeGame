@@ -4,6 +4,7 @@ ToDo:
 - [x] completing the basic game
 - [ ] Adding Crashlytics
 - [ ] User Authentication
+  - [ ] Set up firebaseUI  
 - [ ] Store snake positions
 - [ ] Share user locations
 - [ ] Change and improve score system
