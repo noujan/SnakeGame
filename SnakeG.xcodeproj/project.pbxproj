@@ -15,6 +15,9 @@
 		E969201525E6F24B00D3F565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E969201425E6F24B00D3F565 /* Assets.xcassets */; };
 		E969201825E6F24B00D3F565 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E969201725E6F24B00D3F565 /* Preview Assets.xcassets */; };
 		E97150B125EDAEB90035C8E6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97150B025EDAEB90035C8E6 /* GameKit.framework */; };
+		E97B97B5270FC9F200A436F7 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B4270FC9F200A436F7 /* Extension.swift */; };
+		E97B97B8270FDBFA00A436F7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B7270FDBFA00A436F7 /* GameView.swift */; };
+		E97B97BA270FDDA900A436F7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B9270FDDA800A436F7 /* SignUpView.swift */; };
 		EF337BF8AC6A0578037647DD /* Pods_SnakeG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0627B4E3131E13E68B07C20 /* Pods_SnakeG.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +36,9 @@
 		E969201925E6F24B00D3F565 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E97150B025EDAEB90035C8E6 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		E97150B225EDAEC50035C8E6 /* SnakeG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnakeG.entitlements; sourceTree = "<group>"; };
+		E97B97B4270FC9F200A436F7 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		E97B97B7270FDBFA00A436F7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		E97B97B9270FDDA800A436F7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,13 +86,14 @@
 			children = (
 				E97150B225EDAEC50035C8E6 /* SnakeG.entitlements */,
 				E969201025E6F24900D3F565 /* SnakeGApp.swift */,
-				E969201225E6F24900D3F565 /* SnakeGameView.swift */,
+				E97B97B1270FC4E200A436F7 /* UI */,
 				E969201425E6F24B00D3F565 /* Assets.xcassets */,
 				E969201925E6F24B00D3F565 /* Info.plist */,
 				E93B514626127285003BB81E /* GoogleService-Info.plist */,
 				E969201625E6F24B00D3F565 /* Preview Content */,
 				E93B9FD526361CE1001B57A8 /* Player.swift */,
 				E93B9FD926361DA7001B57A8 /* session.swift */,
+				E97B97B6270FC9F700A436F7 /* Extensions */,
 			);
 			path = SnakeG;
 			sourceTree = "<group>";
@@ -106,6 +113,24 @@
 				C0627B4E3131E13E68B07C20 /* Pods_SnakeG.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E97B97B1270FC4E200A436F7 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E969201225E6F24900D3F565 /* SnakeGameView.swift */,
+				E97B97B7270FDBFA00A436F7 /* GameView.swift */,
+				E97B97B9270FDDA800A436F7 /* SignUpView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E97B97B6270FC9F700A436F7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E97B97B4270FC9F200A436F7 /* Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,7 +268,10 @@
 				E93B9FDA26361DA7001B57A8 /* session.swift in Sources */,
 				E969201325E6F24900D3F565 /* SnakeGameView.swift in Sources */,
 				E969201125E6F24900D3F565 /* SnakeGApp.swift in Sources */,
+				E97B97BA270FDDA900A436F7 /* SignUpView.swift in Sources */,
+				E97B97B5270FC9F200A436F7 /* Extension.swift in Sources */,
 				E93B9FD626361CE1001B57A8 /* Player.swift in Sources */,
+				E97B97B8270FDBFA00A436F7 /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
