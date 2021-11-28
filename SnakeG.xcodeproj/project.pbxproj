@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		E93B514726127285003BB81E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E93B514626127285003BB81E /* GoogleService-Info.plist */; };
 		E93B9FD626361CE1001B57A8 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B9FD526361CE1001B57A8 /* Player.swift */; };
-		E93B9FDA26361DA7001B57A8 /* session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B9FD926361DA7001B57A8 /* session.swift */; };
 		E969201125E6F24900D3F565 /* SnakeGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969201025E6F24900D3F565 /* SnakeGApp.swift */; };
 		E969201325E6F24900D3F565 /* SnakeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969201225E6F24900D3F565 /* SnakeGameView.swift */; };
 		E969201525E6F24B00D3F565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E969201425E6F24B00D3F565 /* Assets.xcassets */; };
 		E969201825E6F24B00D3F565 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E969201725E6F24B00D3F565 /* Preview Assets.xcassets */; };
 		E97150B125EDAEB90035C8E6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97150B025EDAEB90035C8E6 /* GameKit.framework */; };
+		E979A9D027544DEC00F2300C /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9CF27544DEC00F2300C /* Auth.swift */; };
 		E97B97B5270FC9F200A436F7 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B4270FC9F200A436F7 /* Extension.swift */; };
 		E97B97B8270FDBFA00A436F7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B7270FDBFA00A436F7 /* GameView.swift */; };
 		E97B97BA270FDDA900A436F7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B9270FDDA800A436F7 /* SignUpView.swift */; };
@@ -27,7 +27,6 @@
 		C0627B4E3131E13E68B07C20 /* Pods_SnakeG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnakeG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93B514626127285003BB81E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E93B9FD526361CE1001B57A8 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		E93B9FD926361DA7001B57A8 /* session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = session.swift; sourceTree = "<group>"; };
 		E969200D25E6F24900D3F565 /* SnakeG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnakeG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E969201025E6F24900D3F565 /* SnakeGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGApp.swift; sourceTree = "<group>"; };
 		E969201225E6F24900D3F565 /* SnakeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGameView.swift; sourceTree = "<group>"; };
@@ -36,6 +35,7 @@
 		E969201925E6F24B00D3F565 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E97150B025EDAEB90035C8E6 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		E97150B225EDAEC50035C8E6 /* SnakeG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnakeG.entitlements; sourceTree = "<group>"; };
+		E979A9CF27544DEC00F2300C /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		E97B97B4270FC9F200A436F7 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		E97B97B7270FDBFA00A436F7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		E97B97B9270FDDA800A436F7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -86,13 +86,13 @@
 			children = (
 				E97150B225EDAEC50035C8E6 /* SnakeG.entitlements */,
 				E969201025E6F24900D3F565 /* SnakeGApp.swift */,
-				E97B97B1270FC4E200A436F7 /* UI */,
+				E97B97B1270FC4E200A436F7 /* View */,
+				E979A9D127544DFC00F2300C /* Model */,
 				E969201425E6F24B00D3F565 /* Assets.xcassets */,
 				E969201925E6F24B00D3F565 /* Info.plist */,
 				E93B514626127285003BB81E /* GoogleService-Info.plist */,
 				E969201625E6F24B00D3F565 /* Preview Content */,
 				E93B9FD526361CE1001B57A8 /* Player.swift */,
-				E93B9FD926361DA7001B57A8 /* session.swift */,
 				E97B97B6270FC9F700A436F7 /* Extensions */,
 			);
 			path = SnakeG;
@@ -115,14 +115,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E97B97B1270FC4E200A436F7 /* UI */ = {
+		E979A9D127544DFC00F2300C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E979A9CF27544DEC00F2300C /* Auth.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E97B97B1270FC4E200A436F7 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				E969201225E6F24900D3F565 /* SnakeGameView.swift */,
 				E97B97B7270FDBFA00A436F7 /* GameView.swift */,
 				E97B97B9270FDDA800A436F7 /* SignUpView.swift */,
 			);
-			path = UI;
+			path = View;
 			sourceTree = "<group>";
 		};
 		E97B97B6270FC9F700A436F7 /* Extensions */ = {
@@ -247,13 +255,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E93B9FDA26361DA7001B57A8 /* session.swift in Sources */,
 				E969201325E6F24900D3F565 /* SnakeGameView.swift in Sources */,
 				E969201125E6F24900D3F565 /* SnakeGApp.swift in Sources */,
 				E97B97BA270FDDA900A436F7 /* SignUpView.swift in Sources */,
 				E97B97B5270FC9F200A436F7 /* Extension.swift in Sources */,
 				E93B9FD626361CE1001B57A8 /* Player.swift in Sources */,
 				E97B97B8270FDBFA00A436F7 /* GameView.swift in Sources */,
+				E979A9D027544DEC00F2300C /* Auth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
