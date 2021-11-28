@@ -31,6 +31,7 @@ struct SnakeGameView: View {
             scoreLabel = "score: \(score)"
         }
     }
+    @EnvironmentObject var viewModel: AppViewModel
     
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
 
@@ -96,6 +97,12 @@ struct SnakeGameView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
+            /// Signe out button
+            Button{
+                viewModel.signOut()
+            } label: {
+                Text("Sign out")
+            }
             Text(scoreLabel)
                 .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
             ZStack {

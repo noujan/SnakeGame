@@ -50,6 +50,11 @@ class AppViewModel: ObservableObject {
         }
     }
     
+    func signOut() {
+        try? auth.signOut()
+        self.signedIn = false
+    }
+    
 }
 
 struct GameView : View {
@@ -62,9 +67,9 @@ struct GameView : View {
                 SnakeGameView()
             } else {
                 SignUpView()
-                    .environmentObject(viewModel)
             }
         }
+        .environmentObject(viewModel)
         .onAppear() {
             viewModel.signedIn = viewModel.isSignedIn
         }
