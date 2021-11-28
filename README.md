@@ -3,8 +3,8 @@ In this project my goal is to make a Snake game so we can play with our friends 
 ToDo:
 - [x] completing the basic game
 - [ ] Adding Crashlytics
-- [ ] User Authentication
-  - [ ] Set up firebaseUI  
+- [x] User Authentication
+  - [x] Set up firebaseUI  
 - [ ] Store snake positions
 - [ ] Share user locations
 - [ ] Change and improve score system
