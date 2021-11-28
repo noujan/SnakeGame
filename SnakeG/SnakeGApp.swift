@@ -14,16 +14,15 @@ struct SnakeGApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SnakeGameView()
+            GameView()
         }
         
     }
-    
-    
-    class AppDelegate: NSObject, UIApplicationDelegate {
-        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-            FirebaseApp.configure()
-            return true
-        }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
     }
 }
