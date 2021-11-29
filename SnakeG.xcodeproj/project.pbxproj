@@ -15,8 +15,9 @@
 		E969201825E6F24B00D3F565 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E969201725E6F24B00D3F565 /* Preview Assets.xcassets */; };
 		E97150B125EDAEB90035C8E6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97150B025EDAEB90035C8E6 /* GameKit.framework */; };
 		E979A9D027544DEC00F2300C /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9CF27544DEC00F2300C /* Auth.swift */; };
-		E979A9D327544F9500F2300C /* SnakeLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D227544F9500F2300C /* SnakeLocation.swift */; };
+		E979A9D327544F9500F2300C /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D227544F9500F2300C /* Snake.swift */; };
 		E979A9D52754719000F2300C /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D42754719000F2300C /* Screen.swift */; };
+		E979A9D82754882600F2300C /* Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D72754882600F2300C /* Pause.swift */; };
 		E97B97B5270FC9F200A436F7 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B4270FC9F200A436F7 /* UIScreen+Extension.swift */; };
 		E97B97B8270FDBFA00A436F7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B7270FDBFA00A436F7 /* GameView.swift */; };
 		E97B97BA270FDDA900A436F7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B9270FDDA800A436F7 /* SignUpView.swift */; };
@@ -38,8 +39,9 @@
 		E97150B025EDAEB90035C8E6 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		E97150B225EDAEC50035C8E6 /* SnakeG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnakeG.entitlements; sourceTree = "<group>"; };
 		E979A9CF27544DEC00F2300C /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
-		E979A9D227544F9500F2300C /* SnakeLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeLocation.swift; sourceTree = "<group>"; };
+		E979A9D227544F9500F2300C /* Snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		E979A9D42754719000F2300C /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		E979A9D72754882600F2300C /* Pause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pause.swift; sourceTree = "<group>"; };
 		E97B97B4270FC9F200A436F7 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		E97B97B7270FDBFA00A436F7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		E97B97B9270FDDA800A436F7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -123,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				E979A9CF27544DEC00F2300C /* Auth.swift */,
-				E979A9D227544F9500F2300C /* SnakeLocation.swift */,
+				E979A9D227544F9500F2300C /* Snake.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -143,6 +145,7 @@
 				E969201225E6F24900D3F565 /* SnakeGameView.swift */,
 				E97B97B7270FDBFA00A436F7 /* GameView.swift */,
 				E97B97B9270FDDA800A436F7 /* SignUpView.swift */,
+				E979A9D72754882600F2300C /* Pause.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -270,13 +273,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E969201325E6F24900D3F565 /* SnakeGameView.swift in Sources */,
-				E979A9D327544F9500F2300C /* SnakeLocation.swift in Sources */,
+				E979A9D327544F9500F2300C /* Snake.swift in Sources */,
 				E969201125E6F24900D3F565 /* SnakeGApp.swift in Sources */,
 				E97B97BA270FDDA900A436F7 /* SignUpView.swift in Sources */,
 				E97B97B5270FC9F200A436F7 /* UIScreen+Extension.swift in Sources */,
 				E979A9D52754719000F2300C /* Screen.swift in Sources */,
 				E93B9FD626361CE1001B57A8 /* Player.swift in Sources */,
 				E97B97B8270FDBFA00A436F7 /* GameView.swift in Sources */,
+				E979A9D82754882600F2300C /* Pause.swift in Sources */,
 				E979A9D027544DEC00F2300C /* Auth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

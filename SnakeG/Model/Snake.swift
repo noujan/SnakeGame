@@ -1,5 +1,5 @@
 //
-//  SnakeLocation.swift
+//  Snake.swift
 //  SnakeG
 //
 //  Created by Noujan Fakhri on 11/28/21.
