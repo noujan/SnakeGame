@@ -15,6 +15,7 @@ struct SnakeGameView: View {
     @StateObject var thisGame = GeneralInfo()
     @EnvironmentObject var viewModel: AppViewModel
     
+    //TODO: Move the timer to GameView
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
 
     var body: some View {
@@ -49,15 +50,8 @@ struct SnakeGameView: View {
                                 thisGame.timePassed = 0
                             }
                         Button(action: {
-                            snake.posArray = [CGPoint(x: 20, y: 100)]
-                            snake.gameOver = false
-                            snake.startPos = .zero
-                            snake.snakeSize = 10
-                            snake.isStarted = true
-                            snake.dir = direction.down
-                            thisGame.foodPos = CGPoint(x: 0, y: 0)
-                            thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
-                            
+                            snake.reset()
+                            thisGame.reset(snakeSize: snake.snakeSize)
                             
                             timerOneSec = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
                         }, label: {

@@ -70,6 +70,15 @@ class Snake: ObservableObject {
     func getScoreLabel() -> String {
         return scoreLabel
     }
+    
+    func reset() {
+        posArray = [CGPoint(x: 20, y: 100)]
+        gameOver = false
+        startPos = .zero
+        snakeSize = 10
+        isStarted = true
+        dir = direction.down
+    }
 }
 
 class GeneralInfo: ObservableObject {
@@ -84,5 +93,10 @@ class GeneralInfo: ObservableObject {
         let randomY = Int.random(in: 1..<cols) * Int(snakeSize)
         
         return CGPoint(x: randomX, y: randomY)
+    }
+    
+    func reset(snakeSize: CGFloat) {
+        foodPos = CGPoint(x: 0, y: 0)
+        foodPos = changeRectPos(snakeSize: snakeSize)
     }
 }

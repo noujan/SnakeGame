@@ -92,13 +92,12 @@
 				E969201025E6F24900D3F565 /* SnakeGApp.swift */,
 				E97B97B1270FC4E200A436F7 /* View */,
 				E979A9D127544DFC00F2300C /* Model */,
+				E97B97B6270FC9F700A436F7 /* Extensions */,
+				E979A9D62754770800F2300C /* Helper */,
 				E969201425E6F24B00D3F565 /* Assets.xcassets */,
 				E969201925E6F24B00D3F565 /* Info.plist */,
 				E93B514626127285003BB81E /* GoogleService-Info.plist */,
 				E969201625E6F24B00D3F565 /* Preview Content */,
-				E93B9FD526361CE1001B57A8 /* Player.swift */,
-				E97B97B6270FC9F700A436F7 /* Extensions */,
-				E979A9D62754770800F2300C /* Helper */,
 			);
 			path = SnakeG;
 			sourceTree = "<group>";
@@ -132,6 +131,7 @@
 		E979A9D62754770800F2300C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				E93B9FD526361CE1001B57A8 /* Player.swift */,
 				E979A9D42754719000F2300C /* Screen.swift */,
 			);
 			path = Helper;
