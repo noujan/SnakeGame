@@ -5,6 +5,7 @@ ToDo:
 - [x] User Authentication.
   - [x] Set up firebaseUI. 
 - [x] Adding screenshots to this project.
+- [ ] Coonect GameCenter.
 - [ ] Adding Crashlytics.
 - [ ] Store snake positions.
 - [ ] Share user locations.
