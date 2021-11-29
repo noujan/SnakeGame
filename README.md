@@ -4,7 +4,7 @@ ToDo:
 - [x] Completing the basic game.
 - [x] User Authentication.
   - [x] Set up firebaseUI. 
-- [ ] Adding screenshots to this project.
+- [x] Adding screenshots to this project.
 - [ ] Adding Crashlytics.
 - [ ] Store snake positions.
 - [ ] Share user locations.
