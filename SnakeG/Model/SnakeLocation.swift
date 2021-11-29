@@ -74,10 +74,6 @@ class Snake: ObservableObject {
     }
 }
 
-enum direction {
-    case up, down, left, right
-}
-
 class GeneralInfo: ObservableObject {
     var timePassed = 0
     var foodPos = CGPoint(x: 0, y: 0) // the position of the food

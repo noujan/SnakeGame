@@ -98,7 +98,7 @@
 				E969201625E6F24B00D3F565 /* Preview Content */,
 				E93B9FD526361CE1001B57A8 /* Player.swift */,
 				E97B97B6270FC9F700A436F7 /* Extensions */,
-				E979A9D42754719000F2300C /* Screen.swift */,
+				E979A9D62754770800F2300C /* Helper */,
 			);
 			path = SnakeG;
 			sourceTree = "<group>";
@@ -127,6 +127,14 @@
 				E979A9D227544F9500F2300C /* SnakeLocation.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E979A9D62754770800F2300C /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E979A9D42754719000F2300C /* Screen.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		E97B97B1270FC4E200A436F7 /* View */ = {
