@@ -15,6 +15,6 @@ let maxX = UIScreen.main.bounds.maxX - 60
 let minY = CGFloat(20)
 let maxY = UIScreen.main.bounds.maxY - 220
 
-enum direction {
+public enum direction {
     case up, down, left, right
 }

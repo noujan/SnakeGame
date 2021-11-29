@@ -9,22 +9,20 @@ import Foundation
 import SwiftUI
 
 class Snake: ObservableObject {
-    var startPos : CGPoint = .zero // the start poisition of our swipe
-    var isStarted = true // did the user started the swipe?
-    var gameOver = false // for ending the game when the snake hits the screen borders
-    var dir = direction.down // the direction the snake is going to take
-    var posArray = [CGPoint(x: 20, y: 100)] // array of the snake's body positions
-    var snakeSize : CGFloat = 10 // width and height of the snake
-    var scoreLabel = "score: 0"
+    @Published var startPos : CGPoint = .zero // the start poisition of our swipe
+    @Published var isStarted = true // did the user started the swipe?
+    @Published var gameOver = false // for ending the game when the snake hits the screen borders
+    @Published var dir = direction.down // the direction the snake is going to take
+    @Published var posArray = [CGPoint(x: 20, y: 100)] // array of the snake's body positions
+    @Published var snakeSize : CGFloat = 10 // width and height of the snake
+    @Published var scoreLabel = "score: 0"
 
     var score : Int = 0 {
         didSet{
             scoreLabel = "score: \(score)"
         }
     }
-    
-//    @StateObject var thisGame = GeneralInfo()
-    
+        
     func changeDirection () {
         let posX = posArray[0].x
         let posY = posArray[0].y
