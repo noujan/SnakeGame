@@ -21,6 +21,7 @@ struct SignUpView : View {
                 .background(Color(UIColor.secondarySystemBackground))
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
+            
             SecureField("Password", text: $password)
                 .multilineTextAlignment(.center)
                 .overlay(VStack{Divider().offset(x: 0, y: 15)})
