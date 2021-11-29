@@ -2,13 +2,13 @@
 In this project my goal is to make a Snake game so we can play with our friends and families with any iOS device.
 ToDo:
 - [x] Completing the basic game.
-- [ ] Adding Crashlytics.
 - [x] User Authentication.
   - [x] Set up firebaseUI. 
+- [x] Adding screenshots to this project.
+- [ ] Adding Crashlytics.
 - [ ] Store snake positions.
 - [ ] Share user locations.
 - [ ] Change and improve score system.
-- [x] Soon I will add screenshots to this project.
 
 Email: test2@test.com<br>Pass: 1234_qwer
 
