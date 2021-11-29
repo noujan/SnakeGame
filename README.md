@@ -1,7 +1,7 @@
 # SnakeGame
 In this project my goal is to make a Snake game so we can play with our friends and families with any iOS device.
 ToDo:
-- [x] completing the basic game.
+- [x] Completing the basic game.
 - [ ] Adding Crashlytics.
 - [x] User Authentication.
   - [x] Set up firebaseUI. 
