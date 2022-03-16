@@ -7,7 +7,7 @@ ToDo:
 - [x] Adding screenshots to this project.
 - [ ] Add bonus to get more than one. 
 - [ ] Coonect GameCenter.
-- [ ] Adding Crashlytics.
+- [x] Adding Crashlytics.
 - [ ] Adding a menu using <a href="https://medium.com/icode-by-margels/how-to-make-a-nice-side-menu-for-your-ios-app-using-swift-5-8868adafbee0">this link!</a>.
 - [ ] Store snake positions.
 - [ ] Share user locations.
