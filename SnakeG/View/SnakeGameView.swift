@@ -20,11 +20,14 @@ struct SnakeGameView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            /// Signe out button
+            //TODO: pause page - NavigationLink
+            /// Sign out button
             Button{
                 viewModel.signOut()
+//                PauseView()
             } label: {
                 Text("Sign out")
+//                Text("Pause")
             }
             Text(snake.getScoreLabel())
                 .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
@@ -123,7 +126,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             SnakeGameView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
+                .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
         }
         
     }

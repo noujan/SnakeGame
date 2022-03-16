@@ -8,4 +8,8 @@ target 'SnakeG' do
   # Pods for SnakeG
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  # Add the pod for Firebase Crashlytics
+  pod 'Firebase/Crashlytics'
+  # Recommended: Add the Firebase pod for Google Analytics
+  pod 'Firebase/Analytics'
 end
