@@ -13,6 +13,7 @@ class Player {
     var email: String?
     var displayName: String?
     var password: String
+    var snake = Snake()
     
     init(uid: String, email: String?, displayName: String?, password: String) {
         self.uid = uid

@@ -31,7 +31,7 @@ struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             GameView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
+                .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
         }
         
     }
