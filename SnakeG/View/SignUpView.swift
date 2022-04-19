@@ -11,7 +11,7 @@ import SwiftUI
 struct SignUpView : View {
     @State private var email: String = ""
     @State private var password: String = ""
-    @EnvironmentObject var viewModel: AppViewModel
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 50) {

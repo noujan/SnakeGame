@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct GameView : View {
-    @StateObject var viewModel = AppViewModel()
+    @StateObject var viewModel = AuthViewModel()
     
     var body: some View {
         ZStack{

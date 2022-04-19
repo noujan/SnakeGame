@@ -9,25 +9,26 @@ import SwiftUI
 import Foundation
 
 struct SnakeGameView: View {
+    //TODO: Remove timerOneSec
     @State var timerOneSec = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
-
+    
     @StateObject var snake = Snake()
     @StateObject var thisGame = GeneralInfo()
-    @EnvironmentObject var viewModel: AppViewModel
+    @EnvironmentObject var viewModel: AuthViewModel
     
     //TODO: Move the timer to GameView
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
-
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             //TODO: pause page - NavigationLink
             /// Sign out button
             Button{
                 viewModel.signOut()
-//                PauseView()
+                //                PauseView()
             } label: {
                 Text("Sign out")
-//                Text("Pause")
+                //                Text("Pause")
             }
             Text(snake.getScoreLabel())
                 .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
@@ -70,30 +71,30 @@ struct SnakeGameView: View {
             }
             .gesture(DragGesture()
                         .onChanged { gesture in
-                            if snake.isStarted {
-                                snake.startPos = gesture.location
-                                snake.isStarted.toggle()
-                            }
-                            
-                        }
+                if snake.isStarted {
+                    snake.startPos = gesture.location
+                    snake.isStarted.toggle()
+                }
+                
+            }
                         .onEnded {  gesture in
-                            let xDist =  abs(gesture.location.x - snake.startPos.x)
-                            let yDist =  abs(gesture.location.y - snake.startPos.y)
-                            if snake.startPos.y <  gesture.location.y && yDist > xDist {
-                                snake.dir = direction.down
-                            }
-                            else if snake.startPos.y >  gesture.location.y && yDist > xDist {
-                                snake.dir = direction.up
-                            }
-                            else if snake.startPos.x > gesture.location.x && yDist < xDist {
-                                snake.dir = direction.right
-                            }
-                            else if snake.startPos.x < gesture.location.x && yDist < xDist {
-                                snake.dir = direction.left
-                            }
-                            snake.isStarted.toggle()
-                        }
-                        
+                let xDist =  abs(gesture.location.x - snake.startPos.x)
+                let yDist =  abs(gesture.location.y - snake.startPos.y)
+                if snake.startPos.y <  gesture.location.y && yDist > xDist {
+                    snake.dir = direction.down
+                }
+                else if snake.startPos.y >  gesture.location.y && yDist > xDist {
+                    snake.dir = direction.up
+                }
+                else if snake.startPos.x > gesture.location.x && yDist < xDist {
+                    snake.dir = direction.right
+                }
+                else if snake.startPos.x < gesture.location.x && yDist < xDist {
+                    snake.dir = direction.left
+                }
+                snake.isStarted.toggle()
+            }
+                     
             )
             .onReceive(timer) { (_) in
                 if !snake.gameOver {
