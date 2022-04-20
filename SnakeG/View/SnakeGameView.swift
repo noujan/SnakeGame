@@ -21,25 +21,30 @@ struct SnakeGameView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            //TODO: pause page - NavigationLink
-            /// Sign out button
-            Button{
-                viewModel.signOut()
-                //                PauseView()
+            
+            //MARK: PAuse Button
+            Button {
+                //TODO: Pause the game
+                //TODO: Open the side menu
             } label: {
-                Text("Sign out")
-                //                Text("Pause")
+                Text("Pause")
             }
+            
+            //MARK: Score label
             Text(snake.getScoreLabel())
                 .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
+            
+            //MARK: Pink background
             ZStack {
                 Color.pink.opacity(0.3)
                 ZStack {
+                    //MARK: This section put our Snake on the map.
                     ForEach (0..<snake.posArray.count, id: \.self) { index in
                         Rectangle()
                             .frame(width: snake.snakeSize, height: snake.snakeSize)
                             .position(snake.posArray[index])
                     }
+                    //MARK: This part put the food on a random place on the frame
                     Rectangle()
                         .fill(Color.red)
                         .frame(width: snake.snakeSize, height: snake.snakeSize)
@@ -54,6 +59,8 @@ struct SnakeGameView: View {
                                 thisGame.timePassed = 0
                             }
                         Button(action: {
+                            /// Clean up this section and apply Dependecy injection. Reset should be in one place.
+                            
                             snake.reset()
                             thisGame.reset(snakeSize: snake.snakeSize)
                             
@@ -66,7 +73,9 @@ struct SnakeGameView: View {
                 }
             }
             .onAppear() {
+                // Start the game with a random food place
                 thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
+                // Start the game with random Snake place.
                 snake.posArray[0] = thisGame.changeRectPos(snakeSize: snake.snakeSize)
             }
             .gesture(DragGesture()
