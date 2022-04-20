@@ -45,7 +45,7 @@ class AuthViewModel: ObservableObject {
             print("Signed Up successfully")
             DispatchQueue.main.async {
                 self?.signedIn = true
-
+                
             }
         }
     }

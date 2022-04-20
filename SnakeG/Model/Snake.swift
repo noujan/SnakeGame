@@ -16,13 +16,13 @@ class Snake: ObservableObject {
     @Published var posArray = [CGPoint(x: 20, y: 100)] // array of the snake's body positions
     @Published var snakeSize : CGFloat = 10 // width and height of the snake
     @Published var scoreLabel = "score: 0"
-
+    
     var score : Int = 0 {
         didSet{
             scoreLabel = "score: \(score)"
         }
     }
-        
+    
     func changeDirection () {
         let posX = posArray[0].x
         let posY = posArray[0].y
@@ -49,7 +49,7 @@ class Snake: ObservableObject {
                 y: minY - 2 * snakeSize
             )
         }
-
+        
         var prev = posArray[0]
         if dir == .down {
             posArray[0].y += snakeSize
