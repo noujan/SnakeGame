@@ -78,32 +78,34 @@ struct SnakeGameView: View {
                 // Start the game with random Snake place.
                 snake.posArray[0] = thisGame.changeRectPos(snakeSize: snake.snakeSize)
             }
-            .gesture(DragGesture()
-                        .onChanged { gesture in
-                if snake.isStarted {
-                    snake.startPos = gesture.location
-                    snake.isStarted.toggle()
-                }
+            .gesture(
+                DragGesture()
+                    .onChanged { gesture in
+                        /// Recognizing the swipe
+                        if snake.isStarted {
+                            snake.startPos = gesture.location
+                            snake.isStarted.toggle()
+                        }
+                        
+                    }
+                    .onEnded {  gesture in
+                        let xDist =  abs(gesture.location.x - snake.startPos.x)
+                        let yDist =  abs(gesture.location.y - snake.startPos.y)
+                        if snake.startPos.y <  gesture.location.y && yDist > xDist {
+                            snake.dir = direction.down
+                        }
+                        else if snake.startPos.y >  gesture.location.y && yDist > xDist {
+                            snake.dir = direction.up
+                        }
+                        else if snake.startPos.x > gesture.location.x && yDist < xDist {
+                            snake.dir = direction.right
+                        }
+                        else if snake.startPos.x < gesture.location.x && yDist < xDist {
+                            snake.dir = direction.left
+                        }
+                        snake.isStarted.toggle()
+                    }
                 
-            }
-                        .onEnded {  gesture in
-                let xDist =  abs(gesture.location.x - snake.startPos.x)
-                let yDist =  abs(gesture.location.y - snake.startPos.y)
-                if snake.startPos.y <  gesture.location.y && yDist > xDist {
-                    snake.dir = direction.down
-                }
-                else if snake.startPos.y >  gesture.location.y && yDist > xDist {
-                    snake.dir = direction.up
-                }
-                else if snake.startPos.x > gesture.location.x && yDist < xDist {
-                    snake.dir = direction.right
-                }
-                else if snake.startPos.x < gesture.location.x && yDist < xDist {
-                    snake.dir = direction.left
-                }
-                snake.isStarted.toggle()
-            }
-                     
             )
             .onReceive(timer) { (_) in
                 if !snake.gameOver {
