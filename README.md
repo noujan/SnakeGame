@@ -7,12 +7,14 @@ ToDo:
 - [x] Adding screenshots to this project.
 - [x] Adding Crashlytics.
 - [x] Adding a menu.
+- [ ] Fix the pause and play system.
 - [ ] Coonect GameCenter.
 - [ ] Config Multiplayer game
   - [ ] Store snake positions. 
   - [ ] Share user locations.
 - [ ] Change and improve score system.
 - [ ] Add bonus to get more than one. 
+- [ ] Clean up the code to a proper readable MVVM
 
 
 Email: test2@test.com<br>Pass: 1234_qwer
