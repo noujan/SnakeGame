@@ -12,6 +12,12 @@ struct MenuView : View {
     
     var body: some View {
         VStack{
+            List{
+                Text("Play")
+                Text("Leaderboard")
+                Text("Multiplayer")
+                Text("More")
+            }
             
         }
     }
