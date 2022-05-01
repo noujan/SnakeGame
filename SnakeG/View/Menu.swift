@@ -1,5 +1,5 @@
 //
-//  Pause.swift
+//  Menu.swift
 //  SnakeG
 //
 //  Created by Noujan Fakhri on 11/28/21.
@@ -8,25 +8,20 @@
 import Foundation
 import SwiftUI
 
-struct PauseView : View {
+struct MenuView : View {
     
     var body: some View {
         VStack{
-            Text("Game Paused!")
-            Button{
-                
-            } label: {
-                Text("Reset")
-            }
+            
         }
     }
 }
 
 
-struct PauseView_Previews: PreviewProvider {
+struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PauseView()
+            MenuView()
                 .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
         }
         
