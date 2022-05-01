@@ -6,12 +6,14 @@ ToDo:
   - [x] Set up firebaseUI. 
 - [x] Adding screenshots to this project.
 - [x] Adding Crashlytics.
-- [ ] Adding a menu using <a href="https://medium.com/icode-by-margels/how-to-make-a-nice-side-menu-for-your-ios-app-using-swift-5-8868adafbee0">this link!</a>.
-- [ ] Add bonus to get more than one. 
+- [x] Adding a menu.
 - [ ] Coonect GameCenter.
-- [ ] Store snake positions.
-- [ ] Share user locations.
+- [ ] Config Multiplayer game
+  - [ ] Store snake positions. 
+  - [ ] Share user locations.
 - [ ] Change and improve score system.
+- [ ] Add bonus to get more than one. 
+
 
 Email: test2@test.com<br>Pass: 1234_qwer
 
