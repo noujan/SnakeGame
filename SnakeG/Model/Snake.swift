@@ -37,13 +37,13 @@ class Snake: ObservableObject {
                 y: posY
             )
         } else if posY < minY - snakeSize {
-            print("posY up: \(posY), minY: \(minY)")
+//            print("posY up: \(posY), minY: \(minY)")
             posArray[0] = CGPoint(
                 x: posX,
                 y: (maxY/10).rounded()*10 + 5 * snakeSize
             )
         } else if posY > maxY + 4 * snakeSize {
-            print("posY down: \(posY), maxY: \((maxY/10).rounded()*10)")
+//            print("posY down: \(posY), maxY: \((maxY/10).rounded()*10)")
             posArray[0] = CGPoint(
                 x: posX,
                 y: minY - 2 * snakeSize

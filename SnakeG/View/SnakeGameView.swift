@@ -17,15 +17,20 @@ struct SnakeGameView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     //TODO: Move the timer to GameView
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
+    @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
+    
+    fileprivate func Pase() {
+        //Mark: This pausees the game and timer.
+        timer.upstream.connect().cancel()
+        //TODO: Open the menu so I can show the options.
+    }
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             
-            //MARK: PAuse Button
+            //MARK: Pause Button
             Button {
-                //TODO: Pause the game
-                //TODO: Open the side menu
+                Pase()
             } label: {
                 Text("Pause")
             }
@@ -52,7 +57,7 @@ struct SnakeGameView: View {
                 }
                 
                 if snake.gameOver {
-                    VStack{
+                    VStack {
                         Text("Game Over")
                             .onReceive(timerOneSec) { _ in
                                 timerOneSec.upstream.connect().cancel()
