@@ -11,18 +11,18 @@ import Foundation
 struct SnakeGameView: View {
     //TODO: Remove timerOneSec
     @State var timerOneSec = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
-    
+    //TODO: Move the timer to GameView
+    @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
+    @State private var showingMenu = false
     @StateObject var snake = Snake()
     @StateObject var thisGame = GeneralInfo()
     @EnvironmentObject var viewModel: AuthViewModel
-    
-    //TODO: Move the timer to GameView
-    @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
     
     fileprivate func Pase() {
         //Mark: This pausees the game and timer.
         timer.upstream.connect().cancel()
         //TODO: Open the menu so I can show the options.
+        showingMenu.toggle()
     }
     
     var body: some View {
@@ -33,6 +33,9 @@ struct SnakeGameView: View {
                 Pase()
             } label: {
                 Text("Pause")
+            }
+            .sheet(isPresented: $showingMenu) {
+                MenuView()
             }
             
             //MARK: Score label
