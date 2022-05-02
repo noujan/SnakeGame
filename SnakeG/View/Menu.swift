@@ -9,10 +9,15 @@ import Foundation
 import SwiftUI
 
 struct MenuView : View {
-    
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
+
         VStack{
             List{
+                Button("Dismiss") {
+                    dismiss()
+                }
                 Text("Play")
                 Text("Leaderboard")
                 Text("Multiplayer")
