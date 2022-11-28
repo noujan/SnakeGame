@@ -9,8 +9,6 @@ import SwiftUI
 import Foundation
 
 struct SnakeGameView: View {
-    //TODO: Remove timerOneSec
-    @State var timerOneSec = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
     //TODO: Move the timer to GameView
     @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
     @State private var showingMenu = false
@@ -18,7 +16,7 @@ struct SnakeGameView: View {
     @StateObject var thisGame = GeneralInfo()
     @EnvironmentObject var viewModel: AuthViewModel
     
-    fileprivate func Pase() {
+    fileprivate func Pause() {
         //Mark: This pausees the game and timer.
         timer.upstream.connect().cancel()
         //TODO: Open the menu so I can show the options.
@@ -30,7 +28,7 @@ struct SnakeGameView: View {
             
             //MARK: Pause Button
             Button {
-                Pase()
+                Pause()
             } label: {
                 Text("Pause")
             }
@@ -62,17 +60,12 @@ struct SnakeGameView: View {
                 if snake.gameOver {
                     VStack {
                         Text("Game Over")
-                            .onReceive(timerOneSec) { _ in
-                                timerOneSec.upstream.connect().cancel()
-                                thisGame.timePassed = 0
-                            }
                         Button(action: {
                             /// Clean up this section and apply Dependecy injection. Reset should be in one place.
                             
                             snake.reset()
                             thisGame.reset(snakeSize: snake.snakeSize)
                             
-                            timerOneSec = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
                         }, label: {
                             Text("Restart")
                         })
@@ -133,10 +126,6 @@ struct SnakeGameView: View {
                 }
             }
             .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
-            .onReceive(timerOneSec) { (_) in
-                thisGame.timePassed += 1
-                snake.score = thisGame.timePassed
-            }
         }
     }
     
