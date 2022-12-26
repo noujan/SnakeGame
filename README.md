@@ -7,8 +7,8 @@ ToDo:
 - [x] Adding screenshots to this project.
 - [x] Adding Crashlytics.
 - [x] Adding a menu.
-- [ ] Fix the pause and play system.
-  - [ ] Pause the game anfter the menu is dismissed.
+- [x] Fix the pause and play system.
+  - [x] Pause the game anfter the menu is dismissed.
 - [ ] Coonect GameCenter.
 - [ ] Config Multiplayer game
   - [ ] Store snake positions. 
