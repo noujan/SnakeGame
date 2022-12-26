@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 struct MenuView : View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var isPresented: Bool
 
     var body: some View {
 
         VStack{
             List{
                 Button("Dismiss") {
-                    dismiss()
+                    isPresented = false
                 }
                 Text("Play")
                 Text("Leaderboard")
@@ -30,9 +30,11 @@ struct MenuView : View {
 
 
 struct MenuView_Previews: PreviewProvider {
+    @State static var showingMenu = true
+    
     static var previews: some View {
         Group {
-            MenuView()
+            MenuView(isPresented: $showingMenu)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
         }
         

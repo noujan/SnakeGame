@@ -20,7 +20,7 @@ struct SnakeGameView: View {
         //Mark: This pausees the game and timer.
         timer.upstream.connect().cancel()
         //TODO: Open the menu so I can show the options.
-        showingMenu.toggle()
+        showingMenu = true
     }
     
     var body: some View {
@@ -33,7 +33,7 @@ struct SnakeGameView: View {
                 Text("Pause")
             }
             .sheet(isPresented: $showingMenu) {
-                MenuView()
+                MenuView(isPresented: $showingMenu)
             }
             
             //MARK: Score label
