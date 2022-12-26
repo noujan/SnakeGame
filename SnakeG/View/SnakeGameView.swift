@@ -73,6 +73,11 @@ struct SnakeGameView: View {
                     
                 }
             }
+            .onChange(of: showingMenu, perform: { newValue in
+                if showingMenu == false {
+                    timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+                }
+            })
             .onAppear() {
                 // Start the game with a random food place
                 thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
