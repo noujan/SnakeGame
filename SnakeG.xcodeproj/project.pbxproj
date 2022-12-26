@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E93B514726127285003BB81E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E93B514626127285003BB81E /* GoogleService-Info.plist */; };
 		E93B9FD626361CE1001B57A8 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B9FD526361CE1001B57A8 /* Player.swift */; };
+		E95D9902280F7A6000A475C3 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95D9901280F7A6000A475C3 /* General.swift */; };
 		E969201125E6F24900D3F565 /* SnakeGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969201025E6F24900D3F565 /* SnakeGApp.swift */; };
 		E969201325E6F24900D3F565 /* SnakeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969201225E6F24900D3F565 /* SnakeGameView.swift */; };
 		E969201525E6F24B00D3F565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E969201425E6F24B00D3F565 /* Assets.xcassets */; };
@@ -17,7 +18,7 @@
 		E979A9D027544DEC00F2300C /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9CF27544DEC00F2300C /* Auth.swift */; };
 		E979A9D327544F9500F2300C /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D227544F9500F2300C /* Snake.swift */; };
 		E979A9D52754719000F2300C /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D42754719000F2300C /* Screen.swift */; };
-		E979A9D82754882600F2300C /* Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D72754882600F2300C /* Pause.swift */; };
+		E979A9D82754882600F2300C /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D72754882600F2300C /* Menu.swift */; };
 		E97B97B5270FC9F200A436F7 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B4270FC9F200A436F7 /* UIScreen+Extension.swift */; };
 		E97B97B8270FDBFA00A436F7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B7270FDBFA00A436F7 /* GameView.swift */; };
 		E97B97BA270FDDA900A436F7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97B97B9270FDDA800A436F7 /* SignUpView.swift */; };
@@ -30,6 +31,7 @@
 		C0627B4E3131E13E68B07C20 /* Pods_SnakeG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnakeG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93B514626127285003BB81E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E93B9FD526361CE1001B57A8 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		E95D9901280F7A6000A475C3 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		E969200D25E6F24900D3F565 /* SnakeG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnakeG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E969201025E6F24900D3F565 /* SnakeGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGApp.swift; sourceTree = "<group>"; };
 		E969201225E6F24900D3F565 /* SnakeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGameView.swift; sourceTree = "<group>"; };
@@ -41,7 +43,7 @@
 		E979A9CF27544DEC00F2300C /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		E979A9D227544F9500F2300C /* Snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		E979A9D42754719000F2300C /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
-		E979A9D72754882600F2300C /* Pause.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pause.swift; sourceTree = "<group>"; };
+		E979A9D72754882600F2300C /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		E97B97B4270FC9F200A436F7 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		E97B97B7270FDBFA00A436F7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		E97B97B9270FDDA800A436F7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			children = (
 				E979A9CF27544DEC00F2300C /* Auth.swift */,
 				E979A9D227544F9500F2300C /* Snake.swift */,
+				E95D9901280F7A6000A475C3 /* General.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -145,7 +148,7 @@
 				E969201225E6F24900D3F565 /* SnakeGameView.swift */,
 				E97B97B7270FDBFA00A436F7 /* GameView.swift */,
 				E97B97B9270FDDA800A436F7 /* SignUpView.swift */,
-				E979A9D72754882600F2300C /* Pause.swift */,
+				E979A9D72754882600F2300C /* Menu.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E969201325E6F24900D3F565 /* SnakeGameView.swift in Sources */,
+				E95D9902280F7A6000A475C3 /* General.swift in Sources */,
 				E979A9D327544F9500F2300C /* Snake.swift in Sources */,
 				E969201125E6F24900D3F565 /* SnakeGApp.swift in Sources */,
 				E97B97BA270FDDA900A436F7 /* SignUpView.swift in Sources */,
@@ -301,7 +305,7 @@
 				E979A9D52754719000F2300C /* Screen.swift in Sources */,
 				E93B9FD626361CE1001B57A8 /* Player.swift in Sources */,
 				E97B97B8270FDBFA00A436F7 /* GameView.swift in Sources */,
-				E979A9D82754882600F2300C /* Pause.swift in Sources */,
+				E979A9D82754882600F2300C /* Menu.swift in Sources */,
 				E979A9D027544DEC00F2300C /* Auth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,7 +442,7 @@
 				DEVELOPMENT_TEAM = P8SR89H2X5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SnakeG/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,7 +467,7 @@
 				DEVELOPMENT_TEAM = P8SR89H2X5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SnakeG/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

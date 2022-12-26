@@ -16,13 +16,13 @@ class Snake: ObservableObject {
     @Published var posArray = [CGPoint(x: 20, y: 100)] // array of the snake's body positions
     @Published var snakeSize : CGFloat = 10 // width and height of the snake
     @Published var scoreLabel = "score: 0"
-
+    
     var score : Int = 0 {
         didSet{
             scoreLabel = "score: \(score)"
         }
     }
-        
+    
     func changeDirection () {
         let posX = posArray[0].x
         let posY = posArray[0].y
@@ -37,19 +37,19 @@ class Snake: ObservableObject {
                 y: posY
             )
         } else if posY < minY - snakeSize {
-            print("posY up: \(posY), minY: \(minY)")
+//            print("posY up: \(posY), minY: \(minY)")
             posArray[0] = CGPoint(
                 x: posX,
                 y: (maxY/10).rounded()*10 + 5 * snakeSize
             )
         } else if posY > maxY + 4 * snakeSize {
-            print("posY down: \(posY), maxY: \((maxY/10).rounded()*10)")
+//            print("posY down: \(posY), maxY: \((maxY/10).rounded()*10)")
             posArray[0] = CGPoint(
                 x: posX,
                 y: minY - 2 * snakeSize
             )
         }
-
+        
         var prev = posArray[0]
         if dir == .down {
             posArray[0].y += snakeSize
@@ -81,22 +81,3 @@ class Snake: ObservableObject {
     }
 }
 
-class GeneralInfo: ObservableObject {
-    var timePassed = 0
-    var foodPos = CGPoint(x: 0, y: 0) // the position of the food
-    
-    func changeRectPos(snakeSize: CGFloat) -> CGPoint {
-        let rows = Int(maxX/snakeSize)
-        let cols = Int(maxY/snakeSize)
-        
-        let randomX = Int.random(in: 1..<rows) * Int(snakeSize)
-        let randomY = Int.random(in: 1..<cols) * Int(snakeSize)
-        
-        return CGPoint(x: randomX, y: randomY)
-    }
-    
-    func reset(snakeSize: CGFloat) {
-        foodPos = CGPoint(x: 0, y: 0)
-        foodPos = changeRectPos(snakeSize: snakeSize)
-    }
-}

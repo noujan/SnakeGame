@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import FirebaseAuth
 
-class AppViewModel: ObservableObject {
+class AuthViewModel: ObservableObject {
     
     let auth = Auth.auth()
     
@@ -45,7 +45,7 @@ class AppViewModel: ObservableObject {
             print("Signed Up successfully")
             DispatchQueue.main.async {
                 self?.signedIn = true
-
+                
             }
         }
     }
