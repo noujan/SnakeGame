@@ -73,7 +73,7 @@ struct SnakeGameView: View {
                     
                 }
             }
-            .onChange(of: showingMenu, perform: { showingMenu in
+            .onChange(of: showingMenu, perform: { _ in
                 if showingMenu == false {
                     timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
                 }
