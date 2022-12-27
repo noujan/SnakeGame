@@ -9,7 +9,7 @@ ToDo:
 - [x] Adding a menu.
 - [x] Fix the pause and play system.
   - [x] Pause the game anfter the menu is dismissed.
-- [ ] Coonect GameCenter.
+- [ ] Coonect GameCenter and set up a leadeboard using [this link](https://www.freecodecamp.org/news/how-to-implement-a-leaderboard-in-swiftui/).
 - [ ] Config Multiplayer game
   - [ ] Store snake positions. 
   - [ ] Share user locations.
