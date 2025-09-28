@@ -22,6 +22,10 @@ class Snake: ObservableObject {
             scoreLabel = "score: \(score)"
         }
     }
+
+    func didEatFood() {
+        score += 1
+    }
     
     func changeDirection () {
         let posX = posArray[0].x
@@ -78,6 +82,7 @@ class Snake: ObservableObject {
         snakeSize = 10
         isStarted = true
         dir = direction.down
+        score = 0
     }
 }
 

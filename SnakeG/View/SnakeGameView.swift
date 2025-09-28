@@ -117,6 +117,7 @@ struct SnakeGameView: View {
                 if !snake.gameOver {
                     snake.changeDirection()
                     if snake.posArray[0] == thisGame.foodPos {
+                        snake.didEatFood()
                         snake.posArray.append(snake.posArray[0])
                         thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
                         thisGame.timePassed = thisGame.timePassed / 2
@@ -124,10 +125,11 @@ struct SnakeGameView: View {
                         let tempArr = snake.posArray.dropFirst()
                         if tempArr.contains(snake.posArray[0]) {
                             print("No no - You are done! game over!")
+                            GameCenterManager.shared.submit(score: snake.score)
                             snake.gameOver.toggle()
                         }
                     }
-                    
+
                 }
             }
             .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
