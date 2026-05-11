@@ -104,10 +104,10 @@ struct SnakeGameView: View {
                             snake.dir = direction.up
                         }
                         else if snake.startPos.x > gesture.location.x && yDist < xDist {
-                            snake.dir = direction.right
+                            snake.dir = direction.left
                         }
                         else if snake.startPos.x < gesture.location.x && yDist < xDist {
-                            snake.dir = direction.left
+                            snake.dir = direction.right
                         }
                         snake.isStarted.toggle()
                     }
@@ -118,6 +118,7 @@ struct SnakeGameView: View {
                     snake.changeDirection()
                     if snake.posArray[0] == thisGame.foodPos {
                         snake.posArray.append(snake.posArray[0])
+                        snake.score += 1
                         thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
                         thisGame.timePassed = thisGame.timePassed / 2
                     } else {
