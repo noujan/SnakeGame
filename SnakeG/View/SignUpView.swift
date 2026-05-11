@@ -50,6 +50,17 @@ struct SignUpView : View {
                 Text("Sign Up")
             }
             .padding(.leading, UIScreen.screenWidth/8)
+
+            Button {
+                print("Sign in with Google tapped")
+                viewModel.signInWithGoogle()
+            } label: {
+                HStack {
+                    Image(systemName: "g.circle.fill")
+                    Text("Sign in with Google")
+                }
+            }
+            .padding(.leading, UIScreen.screenWidth/8)
         }
         .padding()
         .frame(width: UIScreen.screenWidth/2)
