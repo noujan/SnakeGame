@@ -3,17 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E93B514726127285003BB81E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E93B514626127285003BB81E /* GoogleService-Info.plist */; };
 		E93B9FD626361CE1001B57A8 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B9FD526361CE1001B57A8 /* Player.swift */; };
 		E95D9902280F7A6000A475C3 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95D9901280F7A6000A475C3 /* General.swift */; };
 		E969201125E6F24900D3F565 /* SnakeGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969201025E6F24900D3F565 /* SnakeGApp.swift */; };
 		E969201325E6F24900D3F565 /* SnakeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E969201225E6F24900D3F565 /* SnakeGameView.swift */; };
 		E969201525E6F24B00D3F565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E969201425E6F24B00D3F565 /* Assets.xcassets */; };
 		E969201825E6F24B00D3F565 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E969201725E6F24B00D3F565 /* Preview Assets.xcassets */; };
+		E97017162FB172D8008AA9C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E97017152FB172D8008AA9C6 /* GoogleService-Info.plist */; };
 		E97150B125EDAEB90035C8E6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97150B025EDAEB90035C8E6 /* GameKit.framework */; };
 		E979A9D027544DEC00F2300C /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9CF27544DEC00F2300C /* Auth.swift */; };
 		E979A9D327544F9500F2300C /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979A9D227544F9500F2300C /* Snake.swift */; };
@@ -29,7 +29,6 @@
 		5F4EAAFD165609A93E3A8EF4 /* Pods-SnakeG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnakeG.release.xcconfig"; path = "Target Support Files/Pods-SnakeG/Pods-SnakeG.release.xcconfig"; sourceTree = "<group>"; };
 		7A1E4556E374A472D1C3E773 /* Pods-SnakeG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnakeG.debug.xcconfig"; path = "Target Support Files/Pods-SnakeG/Pods-SnakeG.debug.xcconfig"; sourceTree = "<group>"; };
 		C0627B4E3131E13E68B07C20 /* Pods_SnakeG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnakeG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E93B514626127285003BB81E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E93B9FD526361CE1001B57A8 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		E95D9901280F7A6000A475C3 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		E969200D25E6F24900D3F565 /* SnakeG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnakeG.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +37,7 @@
 		E969201425E6F24B00D3F565 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E969201725E6F24B00D3F565 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E969201925E6F24B00D3F565 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E97017152FB172D8008AA9C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E97150B025EDAEB90035C8E6 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		E97150B225EDAEC50035C8E6 /* SnakeG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnakeG.entitlements; sourceTree = "<group>"; };
 		E979A9CF27544DEC00F2300C /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				E979A9D62754770800F2300C /* Helper */,
 				E969201425E6F24B00D3F565 /* Assets.xcassets */,
 				E969201925E6F24B00D3F565 /* Info.plist */,
-				E93B514626127285003BB81E /* GoogleService-Info.plist */,
+				E97017152FB172D8008AA9C6 /* GoogleService-Info.plist */,
 				E969201625E6F24B00D3F565 /* Preview Content */,
 			);
 			path = SnakeG;
@@ -222,8 +222,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E969201825E6F24B00D3F565 /* Preview Assets.xcassets in Resources */,
+				E97017162FB172D8008AA9C6 /* GoogleService-Info.plist in Resources */,
 				E969201525E6F24B00D3F565 /* Assets.xcassets in Resources */,
-				E93B514726127285003BB81E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,9 +260,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SnakeG/Pods-SnakeG-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SnakeG/Pods-SnakeG-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
