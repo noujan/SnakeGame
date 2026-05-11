@@ -1,0 +1,35 @@
+{
+  "meta" : {
+    "version" : "2024-11-15"
+  },
+  "resources" : {
+    "leaderboardLocalizations" : {
+      "Snake" : [
+        {
+          "formatterOverride" : "INTEGER",
+          "formatterSuffix" : "ss",
+          "formatterSuffixSingular" : "s",
+          "locale" : "en-US",
+          "localID" : "Snake-en-US",
+          "name" : "English"
+        }
+      ]
+    },
+    "leaderboards" : [
+      {
+        "activityProperties" : {
+
+        },
+        "archived" : false,
+        "defaultFormatter" : "INTEGER",
+        "referenceName" : "Snake",
+        "scoreRangeEnd" : "1000000",
+        "scoreRangeStart" : "0",
+        "scoreSortType" : "ASC",
+        "submissionType" : "BEST_SCORE",
+        "vendorIdentifier" : "Snake",
+        "visibility" : null
+      }
+    ]
+  }
+}
