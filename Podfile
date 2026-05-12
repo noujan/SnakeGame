@@ -12,4 +12,6 @@ target 'SnakeG' do
   pod 'Firebase/Crashlytics'
   # Recommended: Add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
+  # Google Sign-In (used together with Firebase Auth)
+  pod 'GoogleSignIn'
 end

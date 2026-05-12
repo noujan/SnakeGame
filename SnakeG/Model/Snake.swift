@@ -55,7 +55,7 @@ class Snake: ObservableObject {
             posArray[0].y += snakeSize
         } else if dir == .up {
             posArray[0].y -= snakeSize
-        } else if dir == .left {
+        } else if dir == .right {
             posArray[0].x += snakeSize
         } else {
             posArray[0].x -= snakeSize
@@ -78,6 +78,7 @@ class Snake: ObservableObject {
         snakeSize = 10
         isStarted = true
         dir = direction.down
+        score = 0
     }
 }
 

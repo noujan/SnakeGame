@@ -22,6 +22,11 @@ struct SnakeGameView: View {
         //TODO: Open the menu so I can show the options.
         showingMenu = true
     }
+
+    fileprivate func restartTimer() {
+        timer.upstream.connect().cancel()
+        timer = Timer.publish(every: thisGame.tickInterval, on: .main, in: .common).autoconnect()
+    }
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -62,10 +67,11 @@ struct SnakeGameView: View {
                         Text("Game Over")
                         Button(action: {
                             /// Clean up this section and apply Dependecy injection. Reset should be in one place.
-                            
+
                             snake.reset()
                             thisGame.reset(snakeSize: snake.snakeSize)
-                            
+                            restartTimer()
+
                         }, label: {
                             Text("Restart")
                         })
@@ -75,7 +81,7 @@ struct SnakeGameView: View {
             }
             .onChange(of: showingMenu, perform: { showingMenu in
                 if showingMenu == false {
-                    timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+                    timer = Timer.publish(every: thisGame.tickInterval, on: .main, in: .common).autoconnect()
                 }
             })
             .onAppear() {
@@ -104,10 +110,10 @@ struct SnakeGameView: View {
                             snake.dir = direction.up
                         }
                         else if snake.startPos.x > gesture.location.x && yDist < xDist {
-                            snake.dir = direction.right
+                            snake.dir = direction.left
                         }
                         else if snake.startPos.x < gesture.location.x && yDist < xDist {
-                            snake.dir = direction.left
+                            snake.dir = direction.right
                         }
                         snake.isStarted.toggle()
                     }
@@ -118,8 +124,10 @@ struct SnakeGameView: View {
                     snake.changeDirection()
                     if snake.posArray[0] == thisGame.foodPos {
                         snake.posArray.append(snake.posArray[0])
+                        snake.score += 1
                         thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
-                        thisGame.timePassed = thisGame.timePassed / 2
+                        thisGame.speedUp()
+                        restartTimer()
                     } else {
                         let tempArr = snake.posArray.dropFirst()
                         if tempArr.contains(snake.posArray[0]) {
