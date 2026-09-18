@@ -15,7 +15,7 @@ final class GameCenterManager: ObservableObject {
     static let shared = GameCenterManager()
 
     /// Leaderboard identifier configured in App Store Connect for high scores.
-    static let leaderboardID = "snakeg.highscore"
+    static let leaderboardID = "Snake"
 
     @Published private(set) var isAuthenticated = false
 
