@@ -11,6 +11,8 @@ import Foundation
 struct SnakeGameView: View {
     //TODO: Move the timer to GameView
     @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
+    // Spawns a bonus treat roughly every 10 seconds.
+    @State private var bonusTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     @State private var showingMenu = false
     @StateObject var snake = Snake()
     @StateObject var thisGame = GeneralInfo()
@@ -65,6 +67,15 @@ struct SnakeGameView: View {
                         .fill(Color.red)
                         .frame(width: snake.snakeSize, height: snake.snakeSize)
                         .position(thisGame.foodPos)
+
+                    //MARK: Bonus treat — a bigger emoji worth extra points
+                    if let bonusPos = thisGame.bonusPos {
+                        Text(thisGame.bonusEmoji)
+                            .font(.system(size: thisGame.bonusSize(snakeSize: snake.snakeSize)))
+                            .frame(width: thisGame.bonusSize(snakeSize: snake.snakeSize),
+                                   height: thisGame.bonusSize(snakeSize: snake.snakeSize))
+                            .position(bonusPos)
+                    }
                 }
                 
                 if snake.gameOver {
@@ -149,9 +160,23 @@ struct SnakeGameView: View {
                     }
                 
             )
+            .onReceive(bonusTimer) { (_) in
+                // Drop a bonus treat on the board while the game is actively running.
+                if !snake.gameOver && !showingMenu {
+                    thisGame.spawnBonus(snakeSize: snake.snakeSize)
+                }
+            }
             .onReceive(timer) { (_) in
                 if !snake.gameOver {
                     snake.changeDirection()
+                    // Remove the bonus if it has been sitting around too long.
+                    thisGame.expireBonusIfNeeded()
+                    if thisGame.hitsBonus(head: snake.posArray[0], snakeSize: snake.snakeSize) {
+                        // Eating the bonus grows the snake and awards extra points.
+                        snake.posArray.append(snake.posArray[0])
+                        snake.award(points: thisGame.bonusPointsValue())
+                        thisGame.clearBonus()
+                    }
                     if snake.posArray[0] == thisGame.foodPos {
                         snake.posArray.append(snake.posArray[0])
                         snake.award(points: thisGame.pointsForFood())
