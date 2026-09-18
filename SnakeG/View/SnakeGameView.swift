@@ -19,8 +19,11 @@ struct SnakeGameView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     fileprivate func Pause() {
-        // Pauses the game by cancelling the timer, then shows the pause menu.
+        // Pauses the game by cancelling both timers, then shows the pause menu.
+        // Cancelling the bonus timer stops its interval advancing behind the
+        // sheet, so a bonus can't spawn moments after the player resumes.
         timer.upstream.connect().cancel()
+        bonusTimer.upstream.connect().cancel()
         showingMenu = true
     }
 
@@ -135,6 +138,9 @@ struct SnakeGameView: View {
             .onChange(of: showingMenu, perform: { showingMenu in
                 if showingMenu == false {
                     timer = Timer.publish(every: thisGame.tickInterval, on: .main, in: .common).autoconnect()
+                    // Resume the bonus timer with a fresh interval so it doesn't
+                    // fire immediately from time that elapsed while paused.
+                    restartBonusTimer()
                 }
             })
             .onAppear() {

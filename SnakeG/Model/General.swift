@@ -41,15 +41,28 @@ class GeneralInfo: ObservableObject {
     private var bonusArmed = false
 
     /// Picks a random food position on the half-cell grid, always *inside* the
-    /// walls, so every piece of food is reachable and aligns with the snake.
+    /// walls, so every piece of food is reachable and aligns with the snake. The
+    /// new food never lands inside the active bonus footprint, so the two rewards
+    /// can't overlap and be collected on the same move.
     func changeRectPos(snakeSize: CGFloat) -> CGPoint {
         let cols = max(1, Int(boardWidth / snakeSize))
         let rows = max(1, Int(boardHeight / snakeSize))
 
-        let col = Int.random(in: 0..<cols)
-        let row = Int.random(in: 0..<rows)
+        // The board is far larger than the 2x2 bonus, so a bounded retry always
+        // finds a free cell quickly.
+        for _ in 0..<100 {
+            let candidate = cellCenter(col: Int.random(in: 0..<cols),
+                                       row: Int.random(in: 0..<rows),
+                                       snakeSize: snakeSize)
+            if let bonusPos, footprint(center: bonusPos, contains: candidate, snakeSize: snakeSize) {
+                continue
+            }
+            return candidate
+        }
 
-        return cellCenter(col: col, row: row, snakeSize: snakeSize)
+        return cellCenter(col: Int.random(in: 0..<cols),
+                          row: Int.random(in: 0..<rows),
+                          snakeSize: snakeSize)
     }
 
     /// A random starting cell that keeps at least one cell of clearance from
