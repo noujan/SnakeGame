@@ -14,10 +14,14 @@ struct GameView : View {
 
     var body: some View {
         ZStack{
-            if viewModel.signedIn {
-                SnakeGameView()
-            } else {
-                SignUpView()
+            // Only mount the game once the launch screen is gone, so the snake's
+            // timer doesn't run unattended underneath the splash overlay.
+            if !showLaunchScreen {
+                if viewModel.signedIn {
+                    SnakeGameView()
+                } else {
+                    SignUpView()
+                }
             }
 
             if showLaunchScreen {
