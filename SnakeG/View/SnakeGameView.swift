@@ -77,10 +77,14 @@ struct SnakeGameView: View {
 
                     //MARK: Bonus treat — a bigger emoji worth extra points
                     if let bonusPos = thisGame.bonusPos {
+                        let bonusSize = thisGame.bonusSize(snakeSize: snake.snakeSize)
                         Text(thisGame.bonusEmoji)
-                            .font(.system(size: thisGame.bonusSize(snakeSize: snake.snakeSize)))
-                            .frame(width: thisGame.bonusSize(snakeSize: snake.snakeSize),
-                                   height: thisGame.bonusSize(snakeSize: snake.snakeSize))
+                            .font(.system(size: bonusSize))
+                            // Emoji glyphs render larger than their point size, so
+                            // shrink to fit and cap the height so the box isn't clipped.
+                            .minimumScaleFactor(0.1)
+                            .lineLimit(1)
+                            .frame(width: bonusSize, height: bonusSize)
                             .position(bonusPos)
                     }
                 }
