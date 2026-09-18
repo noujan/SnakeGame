@@ -22,6 +22,7 @@ class GeneralInfo: ObservableObject {
     static let bonusPoints: Int = 50
     static let bonusSizeMultiplier: CGFloat = 2
     static let bonusLifetime: TimeInterval = 6
+    static let bonusSpawnInterval: TimeInterval = 10
     static let bonusEmojis = ["🍎", "🍕", "🍔", "🍩", "🍒", "🎁", "⭐️", "💎"]
 
     @Published var tickInterval: TimeInterval = GeneralInfo.initialTickInterval
@@ -30,7 +31,9 @@ class GeneralInfo: ObservableObject {
     // Centre of the current bonus, or `nil` when no bonus is on the board.
     @Published var bonusPos: CGPoint? = nil
     @Published var bonusEmoji: String = GeneralInfo.bonusEmojis[0]
-    private var bonusSpawnedAt: Date?
+    // How long the current bonus has been on the board. Tracked in game-tick
+    // time (not wall-clock) so it naturally freezes while the game is paused.
+    private var bonusAge: TimeInterval = 0
 
     /// Picks a random food position on the half-cell grid, always *inside* the
     /// walls, so every piece of food is reachable and aligns with the snake.
@@ -84,27 +87,42 @@ class GeneralInfo: ObservableObject {
         snakeSize * GeneralInfo.bonusSizeMultiplier
     }
 
-    /// Places a fresh bonus at a random spot, fully inside the walls. The bonus
-    /// spans a 2x2 block of cells, so we keep one extra cell of clearance on the
-    /// right and bottom edges, and centre it on the block's shared inner corner.
-    func spawnBonus(snakeSize: CGFloat) {
+    /// Places a fresh bonus at a random spot, fully inside the walls and clear of
+    /// every position in `occupied` (the snake's body and the normal food). The
+    /// bonus spans a 2x2 block of cells, so we keep one extra cell of clearance on
+    /// the right and bottom edges, and centre it on the block's shared inner
+    /// corner. If the board is too crowded to fit one, no bonus is spawned.
+    func spawnBonus(snakeSize: CGFloat, avoiding occupied: [CGPoint]) {
         let cols = max(2, Int(boardWidth / snakeSize))
         let rows = max(2, Int(boardHeight / snakeSize))
 
-        let col = Int.random(in: 0..<(cols - 1))
-        let row = Int.random(in: 0..<(rows - 1))
+        var candidates: [CGPoint] = []
+        for col in 0..<(cols - 1) {
+            for row in 0..<(rows - 1) {
+                let center = CGPoint(x: snakeSize + CGFloat(col) * snakeSize,
+                                     y: snakeSize + CGFloat(row) * snakeSize)
+                if !occupied.contains(where: { footprint(center: center, contains: $0, snakeSize: snakeSize) }) {
+                    candidates.append(center)
+                }
+            }
+        }
 
-        bonusPos = CGPoint(x: snakeSize + CGFloat(col) * snakeSize,
-                           y: snakeSize + CGFloat(row) * snakeSize)
+        guard let chosen = candidates.randomElement() else { return }
+        bonusPos = chosen
         bonusEmoji = GeneralInfo.bonusEmojis.randomElement() ?? GeneralInfo.bonusEmojis[0]
-        bonusSpawnedAt = Date()
+        bonusAge = 0
     }
 
     /// The snake's head eats the bonus when it enters any of the 2x2 cells the
     /// bonus covers, i.e. when it is within one cell of the bonus centre.
     func hitsBonus(head: CGPoint, snakeSize: CGFloat) -> Bool {
         guard let bonusPos else { return false }
-        return abs(head.x - bonusPos.x) < snakeSize && abs(head.y - bonusPos.y) < snakeSize
+        return footprint(center: bonusPos, contains: head, snakeSize: snakeSize)
+    }
+
+    /// Whether `point` falls inside the 2x2 footprint centred on `center`.
+    private func footprint(center: CGPoint, contains point: CGPoint, snakeSize: CGFloat) -> Bool {
+        abs(point.x - center.x) < snakeSize && abs(point.y - center.y) < snakeSize
     }
 
     /// Points the current bonus is worth, scaled by speed just like normal food.
@@ -115,13 +133,16 @@ class GeneralInfo: ObservableObject {
 
     func clearBonus() {
         bonusPos = nil
-        bonusSpawnedAt = nil
+        bonusAge = 0
     }
 
-    /// Removes the bonus once it has been on the board longer than its lifetime.
-    func expireBonusIfNeeded() {
-        guard bonusPos != nil, let bonusSpawnedAt else { return }
-        if Date().timeIntervalSince(bonusSpawnedAt) > GeneralInfo.bonusLifetime {
+    /// Ages the bonus by one game tick and removes it once it has outlived its
+    /// lifetime. Because this is driven by movement ticks (which stop while the
+    /// game is paused), a paused bonus keeps its remaining time.
+    func ageBonus(by interval: TimeInterval) {
+        guard bonusPos != nil else { return }
+        bonusAge += interval
+        if bonusAge > GeneralInfo.bonusLifetime {
             clearBonus()
         }
     }

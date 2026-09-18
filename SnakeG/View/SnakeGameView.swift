@@ -12,7 +12,7 @@ struct SnakeGameView: View {
     //TODO: Move the timer to GameView
     @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
     // Spawns a bonus treat roughly every 10 seconds.
-    @State private var bonusTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    @State private var bonusTimer = Timer.publish(every: GeneralInfo.bonusSpawnInterval, on: .main, in: .common).autoconnect()
     @State private var showingMenu = false
     @StateObject var snake = Snake()
     @StateObject var thisGame = GeneralInfo()
@@ -27,6 +27,13 @@ struct SnakeGameView: View {
     fileprivate func restartTimer() {
         timer.upstream.connect().cancel()
         timer = Timer.publish(every: thisGame.tickInterval, on: .main, in: .common).autoconnect()
+    }
+
+    fileprivate func restartBonusTimer() {
+        // Rebase the bonus publisher so a new run always waits a full interval
+        // before its first bonus, instead of inheriting the old timer's phase.
+        bonusTimer.upstream.connect().cancel()
+        bonusTimer = Timer.publish(every: GeneralInfo.bonusSpawnInterval, on: .main, in: .common).autoconnect()
     }
     
     var body: some View {
@@ -96,6 +103,7 @@ struct SnakeGameView: View {
                             // Re-spawn the snake away from the walls, matching onAppear.
                             snake.posArray[0] = thisGame.randomStartPosition(snakeSize: snake.snakeSize)
                             restartTimer()
+                            restartBonusTimer()
 
                         }, label: {
                             Text("Restart")
@@ -161,18 +169,23 @@ struct SnakeGameView: View {
                 
             )
             .onReceive(bonusTimer) { (_) in
-                // Drop a bonus treat on the board while the game is actively running.
+                // Drop a bonus treat on the board while the game is actively running,
+                // keeping clear of the snake's body and the normal food.
                 if !snake.gameOver && !showingMenu {
-                    thisGame.spawnBonus(snakeSize: snake.snakeSize)
+                    thisGame.spawnBonus(snakeSize: snake.snakeSize,
+                                        avoiding: snake.posArray + [thisGame.foodPos])
                 }
             }
             .onReceive(timer) { (_) in
                 if !snake.gameOver {
                     snake.changeDirection()
-                    // Remove the bonus if it has been sitting around too long.
-                    thisGame.expireBonusIfNeeded()
-                    if thisGame.hitsBonus(head: snake.posArray[0], snakeSize: snake.snakeSize) {
-                        // Eating the bonus grows the snake and awards extra points.
+                    // Age out the bonus if it has been sitting around too long.
+                    thisGame.ageBonus(by: thisGame.tickInterval)
+                    // Eating the bonus grows the snake and awards extra points. We
+                    // note it so the self-collision check below skips the freshly
+                    // appended segment (which shares the head's position).
+                    let ateBonus = thisGame.hitsBonus(head: snake.posArray[0], snakeSize: snake.snakeSize)
+                    if ateBonus {
                         snake.posArray.append(snake.posArray[0])
                         snake.award(points: thisGame.bonusPointsValue())
                         thisGame.clearBonus()
@@ -183,14 +196,14 @@ struct SnakeGameView: View {
                         thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
                         thisGame.speedUp()
                         restartTimer()
-                    } else {
+                    } else if !ateBonus {
                         let tempArr = snake.posArray.dropFirst()
                         if tempArr.contains(snake.posArray[0]) {
                             print("No no - You are done! game over!")
                             snake.gameOver.toggle()
                         }
                     }
-                    
+
                 }
             }
             .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
