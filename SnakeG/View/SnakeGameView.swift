@@ -192,7 +192,7 @@ struct SnakeGameView: View {
                     if ateBonus {
                         snake.posArray.append(snake.posArray[0])
                         snake.award(points: thisGame.bonusPointsValue())
-                        thisGame.clearBonus()
+                        thisGame.collectBonus()
                     }
                     if snake.posArray[0] == thisGame.foodPos {
                         snake.posArray.append(snake.posArray[0])

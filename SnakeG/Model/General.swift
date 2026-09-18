@@ -35,8 +35,9 @@ class GeneralInfo: ObservableObject {
     // time (not wall-clock) so it naturally freezes while the game is paused.
     private var bonusAge: TimeInterval = 0
     // A bonus may only spawn after the player eats a normal piece of food.
-    // Eating normal food "arms" one bonus; spawning it disarms again, so the
-    // player can never collect two bonuses without a normal point in between.
+    // Eating normal food "arms" one bonus; the arm is only consumed when a bonus
+    // is actually eaten, so a missed bonus is re-offered until one is collected.
+    // Either way the player can collect at most one bonus per normal point.
     private var bonusArmed = false
 
     /// Picks a random food position on the half-cell grid, always *inside* the
@@ -119,12 +120,18 @@ class GeneralInfo: ObservableObject {
         bonusPos = chosen
         bonusEmoji = GeneralInfo.bonusEmojis.randomElement() ?? GeneralInfo.bonusEmojis[0]
         bonusAge = 0
-        bonusArmed = false
     }
 
     /// Makes one bonus eligible to spawn. Called when the player eats normal food.
     func armBonus() {
         bonusArmed = true
+    }
+
+    /// Removes an eaten bonus and consumes the arm, so the next bonus requires
+    /// eating another normal point first.
+    func collectBonus() {
+        clearBonus()
+        bonusArmed = false
     }
 
     /// The snake's head eats the bonus when it enters any of the 2x2 cells the
