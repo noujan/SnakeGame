@@ -9,9 +9,9 @@ ToDo:
 - [x] Adding a menu.
 - [x] Fix the pause and play system.
   - [x] Pause the game anfter the menu is dismissed.
-- [ ] Coonect GameCenter and set up a leadeboard using [this link](https://www.freecodecamp.org/news/how-to-implement-a-leaderboard-in-swiftui/).
+- [x] Coonect GameCenter and set up a leadeboard using [this link](https://www.freecodecamp.org/news/how-to-implement-a-leaderboard-in-swiftui/).
 - [ ] Designa and implement a startup screen.
-- [ ] Change and improve score system.
+- [x] Change and improve score system.
 - [ ] Add bonus to get more than one. 
 - [ ] Clean up the code to a proper readable MVVM
 - [ ] Config Multiplayer game
