@@ -10,13 +10,24 @@ import SwiftUI
 
 struct GameView : View {
     @StateObject var viewModel = AuthViewModel()
-    
+    @State private var showLaunchScreen = true
+
     var body: some View {
         ZStack{
             if viewModel.signedIn {
                 SnakeGameView()
             } else {
                 SignUpView()
+            }
+
+            if showLaunchScreen {
+                LaunchScreen {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        showLaunchScreen = false
+                    }
+                }
+                .transition(.opacity)
+                .zIndex(1)
             }
         }
         .environmentObject(viewModel)
