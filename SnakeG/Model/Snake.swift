@@ -15,7 +15,7 @@ class Snake: ObservableObject {
     @Published var isStarted = true // did the user started the swipe?
     @Published var gameOver = false // for ending the game when the snake hits the screen borders
     @Published var dir = direction.down // the direction the snake is going to take
-    @Published var posArray = [CGPoint(x: 20, y: 100)] // array of the snake's body positions
+    @Published var posArray = [CGPoint(x: snakeUnit / 2 + snakeUnit * 2, y: snakeUnit / 2 + snakeUnit * 5)] // array of the snake's body positions (on the half-cell grid)
     @Published var snakeSize : CGFloat = snakeUnit // width and height of the snake
     @Published var scoreLabel = "Score: 0"
     @Published var highScore: Int = UserDefaults.standard.integer(forKey: Snake.highScoreKey)
@@ -56,12 +56,15 @@ class Snake: ObservableObject {
     }
 
     /// Adds points for eating food and keeps the persisted high score in sync.
+    /// The persisted value is only ever raised (never lowered), so a stale cached
+    /// `highScore` can't clobber a higher score written elsewhere.
     func award(points: Int) {
         score += points
-        if score > highScore {
-            highScore = score
-            UserDefaults.standard.set(highScore, forKey: Snake.highScoreKey)
+        let persistedMax = max(score, UserDefaults.standard.integer(forKey: Snake.highScoreKey))
+        if persistedMax > UserDefaults.standard.integer(forKey: Snake.highScoreKey) {
+            UserDefaults.standard.set(persistedMax, forKey: Snake.highScoreKey)
         }
+        highScore = persistedMax
     }
 
     func getScoreLabel() -> String {
@@ -69,7 +72,7 @@ class Snake: ObservableObject {
     }
 
     func reset() {
-        posArray = [CGPoint(x: 20, y: 100)]
+        posArray = [CGPoint(x: snakeUnit / 2 + snakeUnit * 2, y: snakeUnit / 2 + snakeUnit * 5)]
         gameOver = false
         startPos = .zero
         snakeSize = snakeUnit

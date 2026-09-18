@@ -19,6 +19,11 @@ final class GameCenterManager: ObservableObject {
 
     @Published private(set) var isAuthenticated = false
 
+    // Work that arrived before Game Center finished authenticating. It is flushed
+    // once authentication succeeds so nothing is silently dropped.
+    private var pendingScore: Int?
+    private var pendingLeaderboardRequest = false
+
     private init() {}
 
     /// Authenticates the local player with Game Center. Presents the sign-in UI
@@ -39,14 +44,20 @@ final class GameCenterManager: ObservableObject {
 
             Task { @MainActor in
                 self?.isAuthenticated = GKLocalPlayer.local.isAuthenticated
+                if GKLocalPlayer.local.isAuthenticated {
+                    self?.flushPendingWork()
+                }
             }
         }
     }
 
-    /// Submits a score to the leaderboard. No-op if the player isn't signed in.
+    /// Submits a score to the leaderboard. If the player isn't authenticated yet,
+    /// the (best) score is queued and submitted once authentication completes.
     func submit(score: Int) {
         guard GKLocalPlayer.local.isAuthenticated else {
-            print("Skipping score submission: Game Center player not authenticated")
+            print("Queuing score until Game Center authentication completes")
+            pendingScore = max(pendingScore ?? Int.min, score)
+            authenticate()
             return
         }
 
@@ -64,12 +75,26 @@ final class GameCenterManager: ObservableObject {
         }
     }
 
+    /// Runs any work that was waiting on authentication.
+    private func flushPendingWork() {
+        if let score = pendingScore {
+            pendingScore = nil
+            submit(score: score)
+        }
+        if pendingLeaderboardRequest {
+            pendingLeaderboardRequest = false
+            showLeaderboard()
+        }
+    }
+
     /// Presents the Game Center leaderboard UI. If the player isn't signed in to
-    /// Game Center yet, this kicks off authentication instead (the leaderboard
-    /// can't load without an authenticated player, which shows "Cannot Connect").
+    /// Game Center yet, this remembers the request and presents the leaderboard
+    /// automatically once authentication succeeds (instead of the player having
+    /// to tap the button a second time).
     func showLeaderboard() {
         guard GKLocalPlayer.local.isAuthenticated else {
-            print("Cannot show leaderboard: player not authenticated. Retrying authentication.")
+            print("Deferring leaderboard: player not authenticated. Authenticating first.")
+            pendingLeaderboardRequest = true
             authenticate()
             return
         }
@@ -92,6 +117,8 @@ final class GameCenterManager: ObservableObject {
         root.present(viewController, animated: true)
     }
 
+    // The app is single-scene (UIApplicationSupportsMultipleScenes = false), so
+    // the first foreground-active scene is always the one that initiated the request.
     private static func topViewController() -> UIViewController? {
         let scene = UIApplication.shared.connectedScenes
             .first { $0.activationState == .foregroundActive } as? UIWindowScene

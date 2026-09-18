@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SnakeGameView.swift
 //  SnakeG
 //
 //  Created by Noujan Fakhri on 2/24/21.
@@ -17,9 +17,8 @@ struct SnakeGameView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     fileprivate func Pause() {
-        //Mark: This pausees the game and timer.
+        // Pauses the game by cancelling the timer, then shows the pause menu.
         timer.upstream.connect().cancel()
-        //TODO: Open the menu so I can show the options.
         showingMenu = true
     }
 
@@ -80,10 +79,11 @@ struct SnakeGameView: View {
                                 .foregroundColor(.secondary)
                         }
                         Button(action: {
-                            /// Clean up this section and apply Dependecy injection. Reset should be in one place.
-
+                            // TODO: Apply dependency injection so reset lives in one place.
                             snake.reset()
                             thisGame.reset(snakeSize: snake.snakeSize)
+                            // Re-spawn the snake away from the walls, matching onAppear.
+                            snake.posArray[0] = thisGame.randomStartPosition(snakeSize: snake.snakeSize)
                             restartTimer()
 
                         }, label: {
@@ -117,8 +117,8 @@ struct SnakeGameView: View {
             .onAppear() {
                 // Start the game with a random food place
                 thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
-                // Start the game with random Snake place.
-                snake.posArray[0] = thisGame.changeRectPos(snakeSize: snake.snakeSize)
+                // Spawn the snake away from the walls so the first move is safe.
+                snake.posArray[0] = thisGame.randomStartPosition(snakeSize: snake.snakeSize)
             }
             .gesture(
                 DragGesture()
