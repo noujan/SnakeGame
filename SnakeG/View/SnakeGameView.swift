@@ -42,8 +42,14 @@ struct SnakeGameView: View {
             }
             
             //MARK: Score label
-            Text(snake.getScoreLabel())
-                .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
+            HStack {
+                Text(snake.getScoreLabel())
+                Spacer()
+                Text("High: \(snake.highScore)")
+                    .foregroundColor(.secondary)
+            }
+            .font(.system(size: 16, weight: .semibold, design: .monospaced))
+            .padding(EdgeInsets(top: 30, leading: 20, bottom: 0, trailing: 20))
             
             //MARK: Pink background
             ZStack {
@@ -63,8 +69,16 @@ struct SnakeGameView: View {
                 }
                 
                 if snake.gameOver {
-                    VStack {
+                    VStack(spacing: 16) {
                         Text("Game Over")
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                        VStack(spacing: 4) {
+                            Text("Score: \(snake.score)")
+                                .font(.system(size: 18, weight: .semibold, design: .monospaced))
+                            Text("Best: \(snake.highScore)")
+                                .font(.system(size: 15, design: .monospaced))
+                                .foregroundColor(.secondary)
+                        }
                         Button(action: {
                             /// Clean up this section and apply Dependecy injection. Reset should be in one place.
 
@@ -74,9 +88,25 @@ struct SnakeGameView: View {
 
                         }, label: {
                             Text("Restart")
+                                .font(.system(size: 16, weight: .semibold))
+                                .padding(.horizontal, 28)
+                                .padding(.vertical, 12)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.pink))
+                                .foregroundColor(.white)
                         })
                     }
-                    
+                    .padding(28)
+                    .background(RoundedRectangle(cornerRadius: 20).fill(Color(.systemBackground).opacity(0.95)))
+                    .shadow(radius: 10)
+                }
+            }
+            .frame(width: boardWidth, height: boardHeight)
+            .contentShape(Rectangle())
+            .border(Color.pink, width: 2)
+            .onChange(of: snake.gameOver) { isOver in
+                // Save the player's result to Game Center when a run ends.
+                if isOver {
+                    GameCenterManager.shared.submit(score: snake.score)
                 }
             }
             .onChange(of: showingMenu, perform: { showingMenu in
@@ -124,7 +154,7 @@ struct SnakeGameView: View {
                     snake.changeDirection()
                     if snake.posArray[0] == thisGame.foodPos {
                         snake.posArray.append(snake.posArray[0])
-                        snake.score += 1
+                        snake.award(points: thisGame.pointsForFood())
                         thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
                         thisGame.speedUp()
                         restartTimer()
@@ -139,6 +169,8 @@ struct SnakeGameView: View {
                 }
             }
             .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+
+            Spacer(minLength: 0)
         }
     }
     

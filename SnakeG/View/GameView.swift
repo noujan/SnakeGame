@@ -22,6 +22,7 @@ struct GameView : View {
         .environmentObject(viewModel)
         .onAppear() {
             viewModel.signedIn = viewModel.isSignedIn
+            GameCenterManager.shared.authenticate()
         }
     }
 }

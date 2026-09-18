@@ -65,12 +65,9 @@ struct SignUpView: View {
     }
 
     private var header: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "scribble.variable")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 56, height: 56)
-                .foregroundColor(.pink)
+        VStack(spacing: 12) {
+            SnakeLogo(cell: 16, color: .pink)
+                .padding(.bottom, 4)
             Text("SnakeG")
                 .font(.system(size: 32, weight: .bold, design: .rounded))
             Text("Sign in to play and save your score")
