@@ -34,6 +34,10 @@ class GeneralInfo: ObservableObject {
     // How long the current bonus has been on the board. Tracked in game-tick
     // time (not wall-clock) so it naturally freezes while the game is paused.
     private var bonusAge: TimeInterval = 0
+    // A bonus may only spawn after the player eats a normal piece of food.
+    // Eating normal food "arms" one bonus; spawning it disarms again, so the
+    // player can never collect two bonuses without a normal point in between.
+    private var bonusArmed = false
 
     /// Picks a random food position on the half-cell grid, always *inside* the
     /// walls, so every piece of food is reachable and aligns with the snake.
@@ -93,6 +97,10 @@ class GeneralInfo: ObservableObject {
     /// the right and bottom edges, and centre it on the block's shared inner
     /// corner. If the board is too crowded to fit one, no bonus is spawned.
     func spawnBonus(snakeSize: CGFloat, avoiding occupied: [CGPoint]) {
+        // Only spawn if the player has earned a bonus by eating normal food, and
+        // never stack a second bonus on top of one already on the board.
+        guard bonusArmed, bonusPos == nil else { return }
+
         let cols = max(2, Int(boardWidth / snakeSize))
         let rows = max(2, Int(boardHeight / snakeSize))
 
@@ -111,6 +119,12 @@ class GeneralInfo: ObservableObject {
         bonusPos = chosen
         bonusEmoji = GeneralInfo.bonusEmojis.randomElement() ?? GeneralInfo.bonusEmojis[0]
         bonusAge = 0
+        bonusArmed = false
+    }
+
+    /// Makes one bonus eligible to spawn. Called when the player eats normal food.
+    func armBonus() {
+        bonusArmed = true
     }
 
     /// The snake's head eats the bonus when it enters any of the 2x2 cells the
@@ -152,5 +166,6 @@ class GeneralInfo: ObservableObject {
         foodPos = changeRectPos(snakeSize: snakeSize)
         tickInterval = GeneralInfo.initialTickInterval
         clearBonus()
+        bonusArmed = false
     }
 }

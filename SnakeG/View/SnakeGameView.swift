@@ -198,6 +198,8 @@ struct SnakeGameView: View {
                         snake.posArray.append(snake.posArray[0])
                         snake.award(points: thisGame.pointsForFood())
                         thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
+                        // Eating normal food earns the right to one bonus.
+                        thisGame.armBonus()
                         thisGame.speedUp()
                         restartTimer()
                     } else if !ateBonus {
