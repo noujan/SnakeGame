@@ -12,7 +12,7 @@ ToDo:
 - [x] Coonect GameCenter and set up a leadeboard using [this link](https://www.freecodecamp.org/news/how-to-implement-a-leaderboard-in-swiftui/).
 - [x] Designa and implement a startup screen.
 - [x] Change and improve score system.
-- [ ] Add bonus to get more than one. 
+- [x] Add bonus to get more than one. 
 - [ ] Clean up the code to a proper readable MVVM
 - [ ] Config Multiplayer game
   - [ ] Store snake positions. 
