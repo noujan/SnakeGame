@@ -11,20 +11,32 @@ import Foundation
 struct SnakeGameView: View {
     //TODO: Move the timer to GameView
     @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect() // to updates the snake position every 0.1 second
+    // Spawns a bonus treat roughly every 10 seconds.
+    @State private var bonusTimer = Timer.publish(every: GeneralInfo.bonusSpawnInterval, on: .main, in: .common).autoconnect()
     @State private var showingMenu = false
     @StateObject var snake = Snake()
     @StateObject var thisGame = GeneralInfo()
     @EnvironmentObject var viewModel: AuthViewModel
     
     fileprivate func Pause() {
-        // Pauses the game by cancelling the timer, then shows the pause menu.
+        // Pauses the game by cancelling both timers, then shows the pause menu.
+        // Cancelling the bonus timer stops its interval advancing behind the
+        // sheet, so a bonus can't spawn moments after the player resumes.
         timer.upstream.connect().cancel()
+        bonusTimer.upstream.connect().cancel()
         showingMenu = true
     }
 
     fileprivate func restartTimer() {
         timer.upstream.connect().cancel()
         timer = Timer.publish(every: thisGame.tickInterval, on: .main, in: .common).autoconnect()
+    }
+
+    fileprivate func restartBonusTimer() {
+        // Rebase the bonus publisher so a new run always waits a full interval
+        // before its first bonus, instead of inheriting the old timer's phase.
+        bonusTimer.upstream.connect().cancel()
+        bonusTimer = Timer.publish(every: GeneralInfo.bonusSpawnInterval, on: .main, in: .common).autoconnect()
     }
     
     var body: some View {
@@ -65,6 +77,19 @@ struct SnakeGameView: View {
                         .fill(Color.red)
                         .frame(width: snake.snakeSize, height: snake.snakeSize)
                         .position(thisGame.foodPos)
+
+                    //MARK: Bonus treat — a bigger emoji worth extra points
+                    if let bonusPos = thisGame.bonusPos {
+                        let bonusSize = thisGame.bonusSize(snakeSize: snake.snakeSize)
+                        Text(thisGame.bonusEmoji)
+                            .font(.system(size: bonusSize))
+                            // Emoji glyphs render larger than their point size, so
+                            // shrink to fit and cap the height so the box isn't clipped.
+                            .minimumScaleFactor(0.1)
+                            .lineLimit(1)
+                            .frame(width: bonusSize, height: bonusSize)
+                            .position(bonusPos)
+                    }
                 }
                 
                 if snake.gameOver {
@@ -85,6 +110,7 @@ struct SnakeGameView: View {
                             // Re-spawn the snake away from the walls, matching onAppear.
                             snake.posArray[0] = thisGame.randomStartPosition(snakeSize: snake.snakeSize)
                             restartTimer()
+                            restartBonusTimer()
 
                         }, label: {
                             Text("Restart")
@@ -112,6 +138,9 @@ struct SnakeGameView: View {
             .onChange(of: showingMenu, perform: { showingMenu in
                 if showingMenu == false {
                     timer = Timer.publish(every: thisGame.tickInterval, on: .main, in: .common).autoconnect()
+                    // Resume the bonus timer with a fresh interval so it doesn't
+                    // fire immediately from time that elapsed while paused.
+                    restartBonusTimer()
                 }
             })
             .onAppear() {
@@ -149,23 +178,44 @@ struct SnakeGameView: View {
                     }
                 
             )
+            .onReceive(bonusTimer) { (_) in
+                // Drop a bonus treat on the board while the game is actively running,
+                // keeping clear of the snake's body and the normal food.
+                if !snake.gameOver && !showingMenu {
+                    thisGame.spawnBonus(snakeSize: snake.snakeSize,
+                                        avoiding: snake.posArray + [thisGame.foodPos])
+                }
+            }
             .onReceive(timer) { (_) in
                 if !snake.gameOver {
                     snake.changeDirection()
+                    // Age out the bonus if it has been sitting around too long.
+                    thisGame.ageBonus(by: thisGame.tickInterval)
+                    // Eating the bonus grows the snake and awards extra points. We
+                    // note it so the self-collision check below skips the freshly
+                    // appended segment (which shares the head's position).
+                    let ateBonus = thisGame.hitsBonus(head: snake.posArray[0], snakeSize: snake.snakeSize)
+                    if ateBonus {
+                        snake.posArray.append(snake.posArray[0])
+                        snake.award(points: thisGame.bonusPointsValue())
+                        thisGame.collectBonus()
+                    }
                     if snake.posArray[0] == thisGame.foodPos {
                         snake.posArray.append(snake.posArray[0])
                         snake.award(points: thisGame.pointsForFood())
                         thisGame.foodPos = thisGame.changeRectPos(snakeSize: snake.snakeSize)
+                        // Eating normal food earns the right to one bonus.
+                        thisGame.armBonus()
                         thisGame.speedUp()
                         restartTimer()
-                    } else {
+                    } else if !ateBonus {
                         let tempArr = snake.posArray.dropFirst()
                         if tempArr.contains(snake.posArray[0]) {
                             print("No no - You are done! game over!")
                             snake.gameOver.toggle()
                         }
                     }
-                    
+
                 }
             }
             .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
